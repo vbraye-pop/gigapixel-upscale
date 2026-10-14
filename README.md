@@ -20,7 +20,7 @@ Stage 1 runs in ComfyUI on a GPU, stage 2 runs anywhere, a laptop is fine (21 s 
 
 ### Requirements
 
-- A ComfyUI server, 0.28.0 or newer (tested on 0.30.0), with ComfyUI-KJNodes 1.1.4 or newer (the install script pins 1.5.0).
+- A ComfyUI server, 0.28.0 or newer (full runs on 0.30.0, fresh install checked on 0.40.0), with ComfyUI-KJNodes 1.1.4 or newer (the install script pins 1.5.0).
 - A GPU with about 40 GB of VRAM for a 4:3 source, more for a square one. Tested on an RTX PRO 6000.
 - The four models below, even if you only ever use the camera switch: ComfyUI validates both branches.
 - For the command line: [uv](https://docs.astral.sh/uv/) and Python 3.12. Linux or macOS (WSL on Windows).
@@ -34,6 +34,8 @@ COMFYUI_DIR=/path/to/ComfyUI scripts/install.sh
 It clones ComfyUI-KJNodes at a pinned commit (skipped if you already have it), installs its Python packages, downloads the four models into the right folders and checks their sha256. Restart ComfyUI afterwards.
 
 You can also just open the workflow: its missing-model dialog lists the four files with their links.
+
+On a machine without an NVIDIA GPU, KJNodes logs that `PatchTritonVAE` could not be imported. That node needs `triton` and is not used here, ignore it.
 
 > [!NOTE]
 > In a browser, the download button of that dialog only opens the link. Move each file into the folder it names yourself (`models/upscale_models`, `models/diffusion_models`, `models/vae`).
