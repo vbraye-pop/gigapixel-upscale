@@ -5,6 +5,7 @@ hiccups: every read treats a failed or non-JSON reply as a transient miss, and t
 client-side so a submit that died mid-flight can be checked before it is sent again.
 """
 
+import contextlib
 import json
 import time
 import uuid
@@ -116,10 +117,8 @@ class Comfy:
         raise ComfyError(f"timed out after {timeout:.0f}s waiting on {prompt_id}")
 
     def cancel(self, prompt_id: str) -> None:
-        try:
+        with contextlib.suppress(requests.RequestException):
             requests.post(f"{self.url}/api/jobs/{prompt_id}/cancel", headers=self.headers, timeout=self.timeout)
-        except requests.RequestException:
-            pass
 
     def download(self, ref: dict, dest: Path) -> Path:
         """Stream one output image to dest, retrying the whole file once if the proxy drops it."""
