@@ -1,0 +1,37 @@
+[project]
+name = "gigapixel-upscale"
+version = "0.1.0"
+description = "Upscale an image to a ~1.67 gigapixel print poster with ComfyUI, then export a 300 DPI TIFF"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "vbraye-pop", email = "valerien.braye@proseonpixels.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "pyvips[binary]>=3.2",
+    "requests>=2.32",
+]
+
+[project.scripts]
+gigapixel-upscale = "gigapixel_upscale.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.12",
+]
+
+[build-system]
+requires = ["uv_build>=0.8.11,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "UP", "I", "B", "SIM", "RET", "BLE"]
+
+[tool.pytest.ini_options]
+markers = ["live: needs a running ComfyUI server (set COMFY_URL)"]
+addopts = "-m 'not live'"
