@@ -158,6 +158,22 @@ def test_cancel_targets_the_job(monkeypatch):
     assert urls == [f"{URL}/api/jobs/abc/cancel"]
 
 
+def test_uploads_get_a_unique_name_and_the_right_mime_type(monkeypatch, tmp_path):
+    sent = []
+
+    def post(url, files=None, **_):
+        name, _f, mime = files["image"]
+        sent.append((name, mime))
+        return Reply(body={"name": name, "subfolder": "", "type": "input"})
+
+    monkeypatch.setattr(comfy.requests, "post", post)
+    source = tmp_path / "cat.jpg"
+    source.write_bytes(b"x")
+    first, second = Comfy(URL).upload(source), Comfy(URL).upload(source)
+    assert first != second and first.startswith("cat_") and first.endswith(".jpg")
+    assert sent[0][1] == "image/jpeg"
+
+
 def test_a_missing_server_url_is_reported_plainly():
     with pytest.raises(ComfyError, match="COMFY_URL"):
         Comfy("")

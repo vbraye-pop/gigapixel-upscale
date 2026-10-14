@@ -7,6 +7,7 @@ client-side so a submit that died mid-flight can be checked before it is sent ag
 
 import contextlib
 import json
+import mimetypes
 import time
 import uuid
 from collections.abc import Callable
@@ -54,11 +55,14 @@ class Comfy:
             return None
 
     def upload(self, path: Path) -> str:
+        # a unique name, so two people on a shared server never overwrite each other's input
+        name = f"{path.stem}_{uuid.uuid4().hex[:8]}{path.suffix}"
+        mime = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
         with path.open("rb") as f:
             r = requests.post(
                 f"{self.url}/upload/image",
                 headers=self.headers,
-                files={"image": (path.name, f, "image/png")},
+                files={"image": (name, f, mime)},
                 data={"overwrite": "true"},
                 timeout=max(self.timeout, 600),
             )
