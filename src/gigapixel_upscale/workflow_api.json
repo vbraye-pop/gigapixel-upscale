@@ -1,0 +1,370 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Source image"
+    },
+    "inputs": {
+      "image": "source.png"
+    }
+  },
+  "7": {
+    "class_type": "ImageResizeKJv2",
+    "_meta": {
+      "title": "Stage 1 size (fit in 8192 box)"
+    },
+    "inputs": {
+      "width": 8192,
+      "height": 8192,
+      "upscale_method": "lanczos",
+      "keep_proportion": "resize",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 8,
+      "device": "cpu",
+      "image": [
+        "1",
+        0
+      ]
+    }
+  },
+  "30": {
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Quarter size (input of the 4x models)"
+    },
+    "inputs": {
+      "upscale_method": "lanczos",
+      "scale_by": 0.25,
+      "image": [
+        "7",
+        0
+      ]
+    }
+  },
+  "2": {
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "UpscaleModelLoader"
+    },
+    "inputs": {
+      "model_name": "4xNomos2_hq_dat2.safetensors"
+    }
+  },
+  "3": {
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Nomos2 4x"
+    },
+    "inputs": {
+      "upscale_model": [
+        "2",
+        0
+      ],
+      "image": [
+        "30",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNETLoader"
+    },
+    "inputs": {
+      "unet_name": "seedvr2_7b_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "6": {
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "VAELoader"
+    },
+    "inputs": {
+      "vae_name": "seedvr2_ema_vae_fp16.safetensors"
+    }
+  },
+  "8": {
+    "class_type": "SeedVR2Preprocess",
+    "_meta": {
+      "title": "SeedVR2Preprocess"
+    },
+    "inputs": {
+      "resized_images": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "VAEEncodeTiled",
+    "_meta": {
+      "title": "VAEEncodeTiled"
+    },
+    "inputs": {
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8,
+      "pixels": [
+        "8",
+        0
+      ],
+      "vae": [
+        "6",
+        0
+      ]
+    }
+  },
+  "10": {
+    "class_type": "SeedVR2Conditioning",
+    "_meta": {
+      "title": "SeedVR2Conditioning"
+    },
+    "inputs": {
+      "model": [
+        "5",
+        0
+      ],
+      "vae_conditioning": [
+        "9",
+        0
+      ]
+    }
+  },
+  "11": {
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "SeedVR2 4x (one step)"
+    },
+    "inputs": {
+      "seed": 0,
+      "steps": 1,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0,
+      "model": [
+        "5",
+        0
+      ],
+      "positive": [
+        "10",
+        0
+      ],
+      "negative": [
+        "10",
+        1
+      ],
+      "latent_image": [
+        "9",
+        0
+      ]
+    }
+  },
+  "12": {
+    "class_type": "VAEDecodeTiled",
+    "_meta": {
+      "title": "VAEDecodeTiled"
+    },
+    "inputs": {
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8,
+      "samples": [
+        "11",
+        0
+      ],
+      "vae": [
+        "6",
+        0
+      ]
+    }
+  },
+  "13": {
+    "class_type": "SeedVR2PostProcessing",
+    "_meta": {
+      "title": "SeedVR2 color fix"
+    },
+    "inputs": {
+      "color_correction_method": "lab",
+      "images": [
+        "12",
+        0
+      ],
+      "original_resized_images": [
+        "7",
+        0
+      ]
+    }
+  },
+  "14": {
+    "class_type": "ImageBlend",
+    "_meta": {
+      "title": "Detail mix"
+    },
+    "inputs": {
+      "blend_factor": 0.75,
+      "blend_mode": "normal",
+      "image1": [
+        "3",
+        0
+      ],
+      "image2": [
+        "13",
+        0
+      ]
+    }
+  },
+  "16": {
+    "class_type": "ImageBlur",
+    "_meta": {
+      "title": "Detail mix, low frequencies"
+    },
+    "inputs": {
+      "blur_radius": 3,
+      "sigma": 0.75,
+      "image": [
+        "14",
+        0
+      ]
+    }
+  },
+  "17": {
+    "class_type": "ImageBlur",
+    "_meta": {
+      "title": "Nomos2, low frequencies"
+    },
+    "inputs": {
+      "blur_radius": 3,
+      "sigma": 0.75,
+      "image": [
+        "3",
+        0
+      ]
+    }
+  },
+  "18": {
+    "class_type": "ImageAddMulti",
+    "_meta": {
+      "title": "Nomos2 low + detail mix"
+    },
+    "inputs": {
+      "inputcount": 2,
+      "blending": "add",
+      "blend_amount": 1.0,
+      "image_1": [
+        "17",
+        0
+      ],
+      "image_2": [
+        "14",
+        0
+      ]
+    }
+  },
+  "19": {
+    "class_type": "ImageAddMulti",
+    "_meta": {
+      "title": "minus detail mix low frequencies"
+    },
+    "inputs": {
+      "inputcount": 2,
+      "blending": "subtract",
+      "blend_amount": 1.0,
+      "image_1": [
+        "18",
+        0
+      ],
+      "image_2": [
+        "16",
+        0
+      ]
+    }
+  },
+  "25": {
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "UpscaleModelLoader"
+    },
+    "inputs": {
+      "model_name": "RealESRGAN_x4plus.pth"
+    }
+  },
+  "26": {
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "RealESRGAN 4x"
+    },
+    "inputs": {
+      "upscale_model": [
+        "25",
+        0
+      ],
+      "image": [
+        "30",
+        0
+      ]
+    }
+  },
+  "24": {
+    "class_type": "LazySwitchKJ",
+    "_meta": {
+      "title": "Camera photo switch (true = RealESRGAN)"
+    },
+    "inputs": {
+      "switch": false,
+      "on_false": [
+        "19",
+        0
+      ],
+      "on_true": [
+        "26",
+        0
+      ]
+    }
+  },
+  "20": {
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Master"
+    },
+    "inputs": {
+      "filename_prefix": "gigapixel/master",
+      "images": [
+        "24",
+        0
+      ]
+    }
+  },
+  "21": {
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Poster scale (see table in the read me)"
+    },
+    "inputs": {
+      "upscale_method": "lanczos",
+      "scale_by": 4.99,
+      "image": [
+        "24",
+        0
+      ]
+    }
+  },
+  "22": {
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Poster PNG"
+    },
+    "inputs": {
+      "filename_prefix": "gigapixel/poster",
+      "images": [
+        "21",
+        0
+      ]
+    }
+  }
+}

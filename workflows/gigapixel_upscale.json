@@ -1,0 +1,1483 @@
+{
+  "last_node_id": 30,
+  "last_link_id": 32,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        40,
+        330
+      ],
+      "size": [
+        340,
+        420
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        "source.png",
+        "image"
+      ],
+      "title": "Source image"
+    },
+    {
+      "id": 7,
+      "type": "ImageResizeKJv2",
+      "pos": [
+        440,
+        760
+      ],
+      "size": [
+        330,
+        280
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            2,
+            5,
+            17
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [],
+          "slot_index": 1
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [],
+          "slot_index": 2
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageResizeKJv2",
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.5.0"
+      },
+      "widgets_values": [
+        8192,
+        8192,
+        "lanczos",
+        "resize",
+        "0, 0, 0",
+        "center",
+        8,
+        "cpu"
+      ],
+      "title": "Stage 1 size (fit in 8192 box)"
+    },
+    {
+      "id": 30,
+      "type": "ImageScaleBy",
+      "pos": [
+        440,
+        1090
+      ],
+      "size": [
+        330,
+        90
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            4,
+            27
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleBy",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        "lanczos",
+        0.25
+      ],
+      "title": "Quarter size (input of the 4x models)"
+    },
+    {
+      "id": 2,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        860,
+        110
+      ],
+      "size": [
+        330,
+        60
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            3
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "models": [
+          {
+            "name": "4xNomos2_hq_dat2.safetensors",
+            "url": "https://huggingface.co/Phips/4xNomos2_hq_dat2/resolve/main/4xNomos2_hq_dat2.safetensors",
+            "directory": "upscale_models",
+            "hash": "278c78ba9fd333ace4b02b3aeaa0254428baea20a63d3e995e2e4f8a60173f6f",
+            "hash_type": "sha256"
+          }
+        ]
+      },
+      "widgets_values": [
+        "4xNomos2_hq_dat2.safetensors"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "ImageUpscaleWithModel",
+      "pos": [
+        860,
+        210
+      ],
+      "size": [
+        330,
+        50
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 3
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            18,
+            21
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageUpscaleWithModel",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [],
+      "title": "Nomos2 4x"
+    },
+    {
+      "id": 5,
+      "type": "UNETLoader",
+      "pos": [
+        860,
+        420
+      ],
+      "size": [
+        330,
+        90
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            8,
+            10
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "models": [
+          {
+            "name": "seedvr2_7b_int8_convrot.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/SeedVR2/resolve/main/diffusion_models/seedvr2_7b_int8_convrot.safetensors",
+            "directory": "diffusion_models",
+            "hash": "5aa0d25fc9d35e449b659d0c9a5dcb22e2a4fa04032101b95a39da42b32c1be6",
+            "hash_type": "sha256"
+          }
+        ]
+      },
+      "widgets_values": [
+        "seedvr2_7b_int8_convrot.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "VAELoader",
+      "pos": [
+        860,
+        550
+      ],
+      "size": [
+        330,
+        60
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            7,
+            15
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "models": [
+          {
+            "name": "seedvr2_ema_vae_fp16.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/SeedVR2/resolve/main/vae/seedvr2_ema_vae_fp16.safetensors",
+            "directory": "vae",
+            "hash": "20678548f420d98d26f11442d3528f8b8c94e57ee046ef93dbb7633da8612ca1",
+            "hash_type": "sha256"
+          }
+        ]
+      },
+      "widgets_values": [
+        "seedvr2_ema_vae_fp16.safetensors"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "SeedVR2Preprocess",
+      "pos": [
+        860,
+        650
+      ],
+      "size": [
+        240,
+        30
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "resized_images",
+          "type": "IMAGE",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            6
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SeedVR2Preprocess",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "VAEEncodeTiled",
+      "pos": [
+        860,
+        730
+      ],
+      "size": [
+        240,
+        150
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 6
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            9,
+            13
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncodeTiled",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        512,
+        64,
+        64,
+        8
+      ]
+    },
+    {
+      "id": 10,
+      "type": "SeedVR2Conditioning",
+      "pos": [
+        1220,
+        420
+      ],
+      "size": [
+        240,
+        50
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 8
+        },
+        {
+          "name": "vae_conditioning",
+          "type": "LATENT",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            11
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            12
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SeedVR2Conditioning",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 11,
+      "type": "KSampler",
+      "pos": [
+        1220,
+        520
+      ],
+      "size": [
+        270,
+        260
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 10
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 11
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 12
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            14
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        0,
+        "fixed",
+        1,
+        1.0,
+        "euler",
+        "simple",
+        1.0
+      ],
+      "title": "SeedVR2 4x (one step)"
+    },
+    {
+      "id": 12,
+      "type": "VAEDecodeTiled",
+      "pos": [
+        1220,
+        820
+      ],
+      "size": [
+        270,
+        150
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 14
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            16
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecodeTiled",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        512,
+        64,
+        64,
+        8
+      ]
+    },
+    {
+      "id": 13,
+      "type": "SeedVR2PostProcessing",
+      "pos": [
+        1220,
+        1010
+      ],
+      "size": [
+        270,
+        80
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 16
+        },
+        {
+          "name": "original_resized_images",
+          "type": "IMAGE",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            19
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SeedVR2PostProcessing",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        "lab"
+      ],
+      "title": "SeedVR2 color fix"
+    },
+    {
+      "id": 14,
+      "type": "ImageBlend",
+      "pos": [
+        1580,
+        110
+      ],
+      "size": [
+        330,
+        110
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 18
+        },
+        {
+          "name": "image2",
+          "type": "IMAGE",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            20,
+            23
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageBlend",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        0.75,
+        "normal"
+      ],
+      "title": "Detail mix"
+    },
+    {
+      "id": 16,
+      "type": "ImageBlur",
+      "pos": [
+        1980,
+        260
+      ],
+      "size": [
+        300,
+        90
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageBlur",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        3,
+        0.75
+      ],
+      "title": "Detail mix, low frequencies"
+    },
+    {
+      "id": 17,
+      "type": "ImageBlur",
+      "pos": [
+        1980,
+        600
+      ],
+      "size": [
+        300,
+        90
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            22
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageBlur",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        3,
+        0.75
+      ],
+      "title": "Nomos2, low frequencies"
+    },
+    {
+      "id": 18,
+      "type": "ImageAddMulti",
+      "pos": [
+        2340,
+        420
+      ],
+      "size": [
+        300,
+        130
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_1",
+          "type": "IMAGE",
+          "link": 22
+        },
+        {
+          "name": "image_2",
+          "type": "IMAGE",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            24
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageAddMulti",
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.5.0"
+      },
+      "widgets_values": [
+        2,
+        "add",
+        1.0
+      ],
+      "title": "Nomos2 low + detail mix"
+    },
+    {
+      "id": 19,
+      "type": "ImageAddMulti",
+      "pos": [
+        2700,
+        420
+      ],
+      "size": [
+        300,
+        130
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_1",
+          "type": "IMAGE",
+          "link": 24
+        },
+        {
+          "name": "image_2",
+          "type": "IMAGE",
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            28
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageAddMulti",
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.5.0"
+      },
+      "widgets_values": [
+        2,
+        "subtract",
+        1.0
+      ],
+      "title": "minus detail mix low frequencies"
+    },
+    {
+      "id": 25,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        1580,
+        820
+      ],
+      "size": [
+        330,
+        60
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            26
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0",
+        "models": [
+          {
+            "name": "RealESRGAN_x4plus.pth",
+            "url": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth",
+            "directory": "upscale_models",
+            "hash": "4fa0d38905f75ac06eb49a7951b426670021be3018265fd191d2125df9d682f1",
+            "hash_type": "sha256"
+          }
+        ]
+      },
+      "widgets_values": [
+        "RealESRGAN_x4plus.pth"
+      ]
+    },
+    {
+      "id": 26,
+      "type": "ImageUpscaleWithModel",
+      "pos": [
+        1580,
+        920
+      ],
+      "size": [
+        330,
+        50
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 26
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            29
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageUpscaleWithModel",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [],
+      "title": "RealESRGAN 4x"
+    },
+    {
+      "id": 24,
+      "type": "LazySwitchKJ",
+      "pos": [
+        3060,
+        110
+      ],
+      "size": [
+        420,
+        90
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "on_false",
+          "type": "IMAGE",
+          "link": 28
+        },
+        {
+          "name": "on_true",
+          "type": "IMAGE",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            30,
+            31
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LazySwitchKJ",
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.5.0"
+      },
+      "widgets_values": [
+        false
+      ],
+      "color": "#653",
+      "bgcolor": "#865",
+      "title": "Camera photo switch (true = RealESRGAN)"
+    },
+    {
+      "id": 20,
+      "type": "SaveImage",
+      "pos": [
+        3060,
+        250
+      ],
+      "size": [
+        420,
+        380
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "*",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        "gigapixel/master"
+      ],
+      "title": "Master"
+    },
+    {
+      "id": 21,
+      "type": "ImageScaleBy",
+      "pos": [
+        3060,
+        680
+      ],
+      "size": [
+        420,
+        90
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "*",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            32
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleBy",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        "lanczos",
+        4.99
+      ],
+      "color": "#653",
+      "bgcolor": "#865",
+      "title": "Poster scale (see table in the read me)"
+    },
+    {
+      "id": 22,
+      "type": "SaveImage",
+      "pos": [
+        3060,
+        820
+      ],
+      "size": [
+        420,
+        380
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 32
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "cnr_id": "comfy-core",
+        "ver": "0.30.0"
+      },
+      "widgets_values": [
+        "gigapixel/poster"
+      ],
+      "title": "Poster PNG"
+    },
+    {
+      "id": 23,
+      "type": "MarkdownNote",
+      "pos": [
+        40,
+        830
+      ],
+      "size": [
+        380,
+        900
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "MarkdownNote"
+      },
+      "widgets_values": [
+        "# Gigapixel upscale\n\nUpscales any image to about **1.67 gigapixels** (the pixel budget of a 4 x 3 m poster at 300 DPI). The aspect ratio of the source is kept, nothing is cropped.\n\n## How it works\n1. **Stage 1 size** fits the source into an 8192 x 8192 box (aspect kept).\n2. Two upscalers bring it there: **Nomos2** 4x (faithful, clean) and **SeedVR2 7B** (diffusion, adds real texture).\n3. **Frequency blend**: tones and shapes from Nomos2, fine texture from a 25/75 Nomos2/SeedVR2 mix.\n4. **Poster scale** resizes the 8192 px master to the final size with plain Lanczos. A second AI pass here only turns grain into fake scratches, so it is a plain resize on purpose.\n\n## Camera photo switch (orange)\n- **false** (default): AI renders and clean, sharp photos, studio product shots included. Uses the blend.\n- **true**: only soft or noisy camera shots (phone, high ISO, missed focus). Uses RealESRGAN, skips Nomos2 and SeedVR2.\n- If unsure, leave it false.\n\nMeasured on 150 images with ground truth: the blend wins on AI renders and clean photos, RealESRGAN wins on real camera photos.\n\n## Poster scale\nSet it for the aspect of your source to land at about 1.67 GP:\n\n| Source aspect | Master | Poster scale | Poster |\n|---|---|---|---|\n| 1:1 | 8192 x 8192 | 4.99 | ~40,880 x 40,880 |\n| 4:3 | 8192 x 6144 | 5.77 | ~47,270 x 35,450 |\n| 3:2 | 8192 x 5464 | 6.11 | ~50,050 x 33,380 |\n| 16:9 | 8192 x 4608 | 6.65 | ~54,480 x 30,640 |\n\n## Source\n- At least **2048 px on the long side**. Below that SeedVR2 goes past 4x and starts inventing material.\n- Check fine print (packaging text) at 100 percent: small text is where every upscaler fails first.\n\n## Outputs\n- **gigapixel/master**: the 8192 px master. Review this one.\n- **gigapixel/poster**: the full-size PNG. ComfyUI writes no DPI tag: in Photoshop use Image Size with Resample off, set 300 DPI, then save as PSB or TIFF (PSD stops at 30,000 px).\n- On a remote pod the poster PNG is slow to write and to download. Downloading only the master and resizing locally is faster.\n\n## Requirements\n- ComfyUI 0.28.0 or newer (tested on 0.30.0), ComfyUI-KJNodes (tested on 1.5.0).\n- About 40 GB of VRAM at 4:3, more at 1:1. Roughly 45 GB of free RAM for the poster step.\n- Time on an RTX PRO 6000: about 2 to 4 minutes for the master, then a few minutes for the poster PNG.\n- All four models are needed even if you only use the camera switch.\n\n## Models\n```\nComfyUI/models/\n  upscale_models/4xNomos2_hq_dat2.safetensors    huggingface.co/Phips/4xNomos2_hq_dat2 (CC BY 4.0, Philip Hofmann)\n  upscale_models/RealESRGAN_x4plus.pth           github.com/xinntao/Real-ESRGAN releases v0.1.0\n  diffusion_models/seedvr2_7b_int8_convrot.safetensors   huggingface.co/Comfy-Org/SeedVR2\n  vae/seedvr2_ema_vae_fp16.safetensors           huggingface.co/Comfy-Org/SeedVR2\n```\n"
+      ],
+      "title": "Read me"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      7,
+      0,
+      30,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      2,
+      0,
+      3,
+      0,
+      "UPSCALE_MODEL"
+    ],
+    [
+      4,
+      30,
+      0,
+      3,
+      1,
+      "IMAGE"
+    ],
+    [
+      5,
+      7,
+      0,
+      8,
+      0,
+      "IMAGE"
+    ],
+    [
+      6,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      7,
+      6,
+      0,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      8,
+      5,
+      0,
+      10,
+      0,
+      "MODEL"
+    ],
+    [
+      9,
+      9,
+      0,
+      10,
+      1,
+      "LATENT"
+    ],
+    [
+      10,
+      5,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      11,
+      10,
+      0,
+      11,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      10,
+      1,
+      11,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      9,
+      0,
+      11,
+      3,
+      "LATENT"
+    ],
+    [
+      14,
+      11,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      6,
+      0,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      16,
+      12,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ],
+    [
+      17,
+      7,
+      0,
+      13,
+      1,
+      "IMAGE"
+    ],
+    [
+      18,
+      3,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      19,
+      13,
+      0,
+      14,
+      1,
+      "IMAGE"
+    ],
+    [
+      20,
+      14,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ],
+    [
+      21,
+      3,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      22,
+      17,
+      0,
+      18,
+      0,
+      "IMAGE"
+    ],
+    [
+      23,
+      14,
+      0,
+      18,
+      1,
+      "IMAGE"
+    ],
+    [
+      24,
+      18,
+      0,
+      19,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      16,
+      0,
+      19,
+      1,
+      "IMAGE"
+    ],
+    [
+      26,
+      25,
+      0,
+      26,
+      0,
+      "UPSCALE_MODEL"
+    ],
+    [
+      27,
+      30,
+      0,
+      26,
+      1,
+      "IMAGE"
+    ],
+    [
+      28,
+      19,
+      0,
+      24,
+      0,
+      "IMAGE"
+    ],
+    [
+      29,
+      26,
+      0,
+      24,
+      1,
+      "IMAGE"
+    ],
+    [
+      30,
+      24,
+      0,
+      20,
+      0,
+      "*"
+    ],
+    [
+      31,
+      24,
+      0,
+      21,
+      0,
+      "*"
+    ],
+    [
+      32,
+      21,
+      0,
+      22,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Source and stage 1 size",
+      "bounding": [
+        20,
+        250,
+        770,
+        960
+      ],
+      "color": "#444",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Nomos2 4x (faithful)",
+      "bounding": [
+        840,
+        30,
+        370,
+        260
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "SeedVR2 4x (texture)",
+      "bounding": [
+        840,
+        340,
+        680,
+        780
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Frequency blend",
+      "bounding": [
+        1560,
+        30,
+        1460,
+        720
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Camera photos only: RealESRGAN 4x",
+      "bounding": [
+        1560,
+        770,
+        380,
+        230
+      ],
+      "color": "#b06634",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Switch, master and poster",
+      "bounding": [
+        3040,
+        30,
+        460,
+        1190
+      ],
+      "color": "#a1309b",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.45,
+      "offset": [
+        100,
+        200
+      ]
+    }
+  },
+  "version": 0.4
+}
