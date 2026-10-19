@@ -9,12 +9,22 @@ It runs in two stages. A ComfyUI workflow takes the source to an 8192 px master 
 ## How it works
 
 1. The source is fitted into an 8192 x 8192 box (never more than 4x, past that SeedVR2 invents material).
-2. **Nomos2** (4x, faithful and clean) and **SeedVR2 7B** (one-step diffusion, adds real texture) both upscale it to that size.
+2. **Nomos2** (4x, faithful and clean) and **SeedVR2 7B** (one-step diffusion, adds real texture) both upscale it to that size. SeedVR2 can be swapped for any other generative upscaler, see below.
 3. A frequency blend keeps tones and shapes from Nomos2 and takes fine texture from a 25/75 Nomos2/SeedVR2 mix. That beats either model alone on AI renders and clean photos.
 4. For soft or noisy camera shots a switch uses **RealESRGAN** instead, which wins on those.
 5. The 8192 master is resized to the poster pixel budget, tagged 300 DPI, given a colour profile and saved as TIFF.
 
 Stage 1 runs in ComfyUI on a GPU, stage 2 runs anywhere, a laptop is fine (21 s and 240 MB of RAM for a 1.67 GP poster).
+
+### Using another generative upscaler
+
+SeedVR2 is one choice of detail source, not a requirement. The blend only needs a second upscale of the same image at the same size, so any generative upscaler can take its place: open models like SUPIR or a newer SeedVR, or closed services like Magnific or Topaz.
+
+- In ComfyUI, replace the SeedVR2 nodes with the other model's nodes, or with a Load Image node holding the external result, and wire it where SeedVR2 went into **Detail mix**.
+- The result has to line up pixel for pixel with the Nomos2 output: the size the **Stage 1 size** node gives, no crop, no shift. Resize it to that size if the service returns another one.
+- Keep creativity settings low, Magnific's especially. The blend takes shapes and tones from Nomos2, so anything the other model moves or redraws shows up as a double edge.
+- The 0.75 detail share and the σ 0.75 split were measured with SeedVR2 only. Check a few crops at 100 percent with another model and adjust **Detail mix**.
+- The command line always runs the bundled SeedVR2 workflow.
 
 ## Install and setup
 
