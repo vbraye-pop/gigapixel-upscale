@@ -70,6 +70,8 @@ By image type: [full_by_type.png](results/full_by_type.png).
 | FLUX.2 klein 9B | non-commercial | 0.1407 | +0.0153 [+0.009, +0.023] | 7.20 | 0.97 |
 | Magnific Precision v2 | paid API | 0.1802 | +0.0547 [+0.040, +0.069] | 2.58 | 0.09 |
 
+![raw outputs at 200 percent](results/screen_crops.png)
+
 The image edit models drift in colour and position, and the blend can only keep a small share of them. Magnific Precision v2 returns 2x whatever scale is asked, so it ran as two 2x calls at default settings, which doubles its grain.
 
 Limits: inputs are 512 px, not the 2048 px of production. API times include the provider's queue.
