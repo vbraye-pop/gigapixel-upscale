@@ -23,8 +23,10 @@ SeedVR2 is one choice of detail source, not a requirement. The blend only needs 
 - In ComfyUI, replace the SeedVR2 nodes with the other model's nodes, or with a Load Image node holding the external result, and wire it where SeedVR2 went into **Detail mix**.
 - The result has to line up pixel for pixel with the Nomos2 output: the size the **Stage 1 size** node gives, no crop, no shift. Resize it to that size if the service returns another one.
 - Keep creativity settings low, Magnific's especially. The blend takes shapes and tones from Nomos2, so anything the other model moves or redraws shows up as a double edge.
-- The 0.75 detail share and the σ 0.75 split were measured with SeedVR2 only. Check a few crops at 100 percent with another model and adjust **Detail mix**.
+- Each model has its own best detail share in **Detail mix**: 0.75 for SeedVR2 and Topaz Wonder 3.5, 0.25 for image edit models like Qwen-Image or FLUX.
 - The command line always runs the bundled SeedVR2 workflow.
+
+I compared SeedVR2 7B with 15 other detail sources, open and closed (Qwen-Image 2.1, FLUX.2 and FLUX.3 klein, SUPIR, VOSR2, Topaz, Magnific and others). None does better. Topaz Wonder 3.5 comes closest, 0.003 DISTS behind on clean photos and AI renders, for $2.04 per master against $0.04. Results and the harness are in [bench](bench/).
 
 ## Install and setup
 

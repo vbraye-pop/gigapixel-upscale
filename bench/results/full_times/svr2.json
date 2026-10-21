@@ -1,0 +1,602 @@
+{
+ "drealsr_Canon_10": {
+  "seconds": 4.28,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_Canon_14": {
+  "seconds": 4.42,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_Canon_42": {
+  "seconds": 4.58,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_Canon_56": {
+  "seconds": 4.39,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_DSC_1045": {
+  "seconds": 4.31,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1057": {
+  "seconds": 4.39,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1233": {
+  "seconds": 4.45,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1241": {
+  "seconds": 4.5,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1265": {
+  "seconds": 4.39,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1286": {
+  "seconds": 4.4,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_DSC_1404": {
+  "seconds": 4.44,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_DSC_1425": {
+  "seconds": 4.57,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1454": {
+  "seconds": 4.47,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1474": {
+  "seconds": 4.36,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1575": {
+  "seconds": 4.54,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1599": {
+  "seconds": 4.38,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_DSC_1603": {
+  "seconds": 4.4,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_IMG_113": {
+  "seconds": 4.37,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_IMG_118": {
+  "seconds": 4.43,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_IMG_130": {
+  "seconds": 4.52,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_IMG_143": {
+  "seconds": 4.49,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_IMG_150": {
+  "seconds": 4.45,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_IMG_190": {
+  "seconds": 4.55,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_IMG_203": {
+  "seconds": 4.31,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_P1140090": {
+  "seconds": 4.75,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_P1140122": {
+  "seconds": 4.63,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_P1140134": {
+  "seconds": 4.45,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_P1140138": {
+  "seconds": 4.55,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_P1140189": {
+  "seconds": 4.54,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_P1140279": {
+  "seconds": 4.53,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_P1140401": {
+  "seconds": 4.45,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_P1140434": {
+  "seconds": 4.37,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_P1160566": {
+  "seconds": 4.18,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_P1160772": {
+  "seconds": 4.51,
+  "peak_vram_gb": 11.6
+ },
+ "drealsr_P1160776": {
+  "seconds": 4.26,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_P1171031": {
+  "seconds": 4.31,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_P1171051": {
+  "seconds": 4.37,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_123": {
+  "seconds": 4.46,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_128": {
+  "seconds": 4.61,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_145": {
+  "seconds": 4.59,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_16": {
+  "seconds": 4.4,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_182": {
+  "seconds": 4.43,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_196": {
+  "seconds": 4.41,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_197": {
+  "seconds": 4.39,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_206": {
+  "seconds": 4.37,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_233": {
+  "seconds": 4.4,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_50": {
+  "seconds": 4.68,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_57": {
+  "seconds": 4.73,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_62": {
+  "seconds": 4.59,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_panasonic_85": {
+  "seconds": 4.54,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_107": {
+  "seconds": 4.47,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_11": {
+  "seconds": 4.53,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_120": {
+  "seconds": 4.48,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_158": {
+  "seconds": 4.53,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_160": {
+  "seconds": 4.33,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_183": {
+  "seconds": 4.32,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_189": {
+  "seconds": 4.15,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_49": {
+  "seconds": 4.5,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_53": {
+  "seconds": 4.41,
+  "peak_vram_gb": 11.5
+ },
+ "drealsr_sony_80": {
+  "seconds": 4.38,
+  "peak_vram_gb": 11.5
+ },
+ "krea_architecture_facade": {
+  "seconds": 3.41,
+  "peak_vram_gb": 11.2
+ },
+ "krea_beauty_closeup": {
+  "seconds": 3.38,
+  "peak_vram_gb": 11.4
+ },
+ "krea_beauty_group": {
+  "seconds": 3.53,
+  "peak_vram_gb": 11.2
+ },
+ "krea_beauty_hair": {
+  "seconds": 3.45,
+  "peak_vram_gb": 11.3
+ },
+ "krea_beauty_makeup": {
+  "seconds": 3.41,
+  "peak_vram_gb": 11.4
+ },
+ "krea_beauty_man": {
+  "seconds": 3.35,
+  "peak_vram_gb": 11.4
+ },
+ "krea_car_detail": {
+  "seconds": 3.55,
+  "peak_vram_gb": 11.3
+ },
+ "krea_fashion_dress": {
+  "seconds": 4.14,
+  "peak_vram_gb": 11.3
+ },
+ "krea_fashion_knit": {
+  "seconds": 3.62,
+  "peak_vram_gb": 11.3
+ },
+ "krea_fashion_suit": {
+  "seconds": 3.5,
+  "peak_vram_gb": 11.4
+ },
+ "krea_food_burger": {
+  "seconds": 3.61,
+  "peak_vram_gb": 11.2
+ },
+ "krea_food_coffee": {
+  "seconds": 3.34,
+  "peak_vram_gb": 11.4
+ },
+ "krea_food_dessert": {
+  "seconds": 3.41,
+  "peak_vram_gb": 11.4
+ },
+ "krea_interior_bedroom": {
+  "seconds": 3.52,
+  "peak_vram_gb": 11.3
+ },
+ "krea_interior_boucle": {
+  "seconds": 3.67,
+  "peak_vram_gb": 11.5
+ },
+ "krea_interior_chair": {
+  "seconds": 3.4,
+  "peak_vram_gb": 11.2
+ },
+ "krea_interior_kitchen": {
+  "seconds": 3.44,
+  "peak_vram_gb": 11.5
+ },
+ "krea_interior_living": {
+  "seconds": 4.07,
+  "peak_vram_gb": 11.5
+ },
+ "krea_jewelry_bracelet": {
+  "seconds": 3.41,
+  "peak_vram_gb": 11.2
+ },
+ "krea_jewelry_earrings": {
+  "seconds": 3.43,
+  "peak_vram_gb": 11.2
+ },
+ "krea_jewelry_necklace": {
+  "seconds": 4.05,
+  "peak_vram_gb": 11.2
+ },
+ "krea_jewelry_ring": {
+  "seconds": 3.47,
+  "peak_vram_gb": 11.5
+ },
+ "krea_jewelry_watch": {
+  "seconds": 3.52,
+  "peak_vram_gb": 11.2
+ },
+ "krea_landscape_mountain": {
+  "seconds": 3.57,
+  "peak_vram_gb": 11.6
+ },
+ "krea_product_cosmetics": {
+  "seconds": 3.52,
+  "peak_vram_gb": 11.5
+ },
+ "krea_product_handbag": {
+  "seconds": 3.46,
+  "peak_vram_gb": 11.5
+ },
+ "krea_product_headphones": {
+  "seconds": 3.44,
+  "peak_vram_gb": 11.2
+ },
+ "krea_product_packaging": {
+  "seconds": 3.46,
+  "peak_vram_gb": 11.2
+ },
+ "krea_product_perfume": {
+  "seconds": 3.46,
+  "peak_vram_gb": 11.2
+ },
+ "krea_product_sneaker": {
+  "seconds": 3.26,
+  "peak_vram_gb": 11.2
+ },
+ "lsdir_0000004": {
+  "seconds": 1.28,
+  "peak_vram_gb": 10.1
+ },
+ "lsdir_0000008": {
+  "seconds": 1.14,
+  "peak_vram_gb": 9.8
+ },
+ "lsdir_0000011": {
+  "seconds": 1.56,
+  "peak_vram_gb": 10.4
+ },
+ "lsdir_0000014": {
+  "seconds": 1.1,
+  "peak_vram_gb": 10.0
+ },
+ "lsdir_0000016": {
+  "seconds": 2.08,
+  "peak_vram_gb": 11.0
+ },
+ "lsdir_0000020": {
+  "seconds": 2.14,
+  "peak_vram_gb": 10.9
+ },
+ "lsdir_0000031": {
+  "seconds": 1.15,
+  "peak_vram_gb": 10.1
+ },
+ "lsdir_0000032": {
+  "seconds": 1.66,
+  "peak_vram_gb": 10.6
+ },
+ "lsdir_0000035": {
+  "seconds": 1.2,
+  "peak_vram_gb": 10.1
+ },
+ "lsdir_0000043": {
+  "seconds": 2.46,
+  "peak_vram_gb": 11.0
+ },
+ "lsdir_0000046": {
+  "seconds": 2.44,
+  "peak_vram_gb": 11.0
+ },
+ "lsdir_0000049": {
+  "seconds": 3.41,
+  "peak_vram_gb": 11.3
+ },
+ "lsdir_0000051": {
+  "seconds": 1.37,
+  "peak_vram_gb": 10.3
+ },
+ "lsdir_0000054": {
+  "seconds": 1.7,
+  "peak_vram_gb": 10.8
+ },
+ "lsdir_0000059": {
+  "seconds": 2.0,
+  "peak_vram_gb": 10.9
+ },
+ "lsdir_0000067": {
+  "seconds": 1.18,
+  "peak_vram_gb": 10.2
+ },
+ "lsdir_0000070": {
+  "seconds": 1.66,
+  "peak_vram_gb": 10.7
+ },
+ "lsdir_0000077": {
+  "seconds": 1.02,
+  "peak_vram_gb": 9.9
+ },
+ "lsdir_0000079": {
+  "seconds": 1.57,
+  "peak_vram_gb": 10.0
+ },
+ "lsdir_0000088": {
+  "seconds": 1.94,
+  "peak_vram_gb": 11.0
+ },
+ "lsdir_0000101": {
+  "seconds": 1.52,
+  "peak_vram_gb": 10.6
+ },
+ "lsdir_0000108": {
+  "seconds": 1.94,
+  "peak_vram_gb": 11.1
+ },
+ "lsdir_0000111": {
+  "seconds": 2.67,
+  "peak_vram_gb": 11.0
+ },
+ "lsdir_0000112": {
+  "seconds": 2.6,
+  "peak_vram_gb": 11.1
+ },
+ "lsdir_0000117": {
+  "seconds": 1.03,
+  "peak_vram_gb": 9.8
+ },
+ "lsdir_0000118": {
+  "seconds": 1.61,
+  "peak_vram_gb": 10.6
+ },
+ "lsdir_0000120": {
+  "seconds": 1.14,
+  "peak_vram_gb": 10.0
+ },
+ "lsdir_0000122": {
+  "seconds": 1.48,
+  "peak_vram_gb": 10.5
+ },
+ "lsdir_0000127": {
+  "seconds": 1.16,
+  "peak_vram_gb": 10.0
+ },
+ "lsdir_0000128": {
+  "seconds": 1.19,
+  "peak_vram_gb": 10.2
+ },
+ "lsdir_0000129": {
+  "seconds": 1.34,
+  "peak_vram_gb": 10.2
+ },
+ "lsdir_0000132": {
+  "seconds": 1.51,
+  "peak_vram_gb": 10.5
+ },
+ "lsdir_0000133": {
+  "seconds": 1.07,
+  "peak_vram_gb": 10.0
+ },
+ "lsdir_0000134": {
+  "seconds": 1.57,
+  "peak_vram_gb": 10.7
+ },
+ "lsdir_0000136": {
+  "seconds": 1.48,
+  "peak_vram_gb": 10.5
+ },
+ "lsdir_0000138": {
+  "seconds": 1.83,
+  "peak_vram_gb": 11.0
+ },
+ "lsdir_0000139": {
+  "seconds": 1.34,
+  "peak_vram_gb": 10.4
+ },
+ "lsdir_0000146": {
+  "seconds": 1.42,
+  "peak_vram_gb": 10.5
+ },
+ "lsdir_0000147": {
+  "seconds": 1.48,
+  "peak_vram_gb": 10.4
+ },
+ "lsdir_0000154": {
+  "seconds": 1.85,
+  "peak_vram_gb": 10.8
+ },
+ "lsdir_0000158": {
+  "seconds": 1.32,
+  "peak_vram_gb": 10.4
+ },
+ "lsdir_0000166": {
+  "seconds": 2.24,
+  "peak_vram_gb": 10.9
+ },
+ "lsdir_0000180": {
+  "seconds": 0.97,
+  "peak_vram_gb": 10.0
+ },
+ "lsdir_0000191": {
+  "seconds": 1.52,
+  "peak_vram_gb": 10.7
+ },
+ "lsdir_0000192": {
+  "seconds": 1.05,
+  "peak_vram_gb": 10.0
+ },
+ "lsdir_0000197": {
+  "seconds": 1.61,
+  "peak_vram_gb": 10.6
+ },
+ "lsdir_0000205": {
+  "seconds": 1.39,
+  "peak_vram_gb": 10.5
+ },
+ "lsdir_0000207": {
+  "seconds": 1.54,
+  "peak_vram_gb": 10.7
+ },
+ "lsdir_0000208": {
+  "seconds": 1.24,
+  "peak_vram_gb": 10.0
+ },
+ "lsdir_0000210": {
+  "seconds": 1.53,
+  "peak_vram_gb": 10.7
+ },
+ "lsdir_0000212": {
+  "seconds": 1.18,
+  "peak_vram_gb": 10.1
+ },
+ "lsdir_0000215": {
+  "seconds": 1.07,
+  "peak_vram_gb": 9.9
+ },
+ "lsdir_0000217": {
+  "seconds": 2.02,
+  "peak_vram_gb": 10.9
+ },
+ "lsdir_0000221": {
+  "seconds": 1.57,
+  "peak_vram_gb": 10.7
+ },
+ "lsdir_0000222": {
+  "seconds": 1.24,
+  "peak_vram_gb": 10.2
+ },
+ "lsdir_0000231": {
+  "seconds": 1.28,
+  "peak_vram_gb": 10.2
+ },
+ "lsdir_0000240": {
+  "seconds": 1.19,
+  "peak_vram_gb": 10.1
+ },
+ "lsdir_0000242": {
+  "seconds": 1.55,
+  "peak_vram_gb": 10.5
+ },
+ "lsdir_0000247": {
+  "seconds": 0.87,
+  "peak_vram_gb": 9.7
+ },
+ "lsdir_0000249": {
+  "seconds": 1.78,
+  "peak_vram_gb": 11.1
+ }
+}

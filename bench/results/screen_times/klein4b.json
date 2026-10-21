@@ -1,0 +1,122 @@
+{
+ "drealsr_Canon_10": {
+  "seconds": 7.88,
+  "peak_vram_gb": 25.2
+ },
+ "drealsr_DSC_1233": {
+  "seconds": 8.1,
+  "peak_vram_gb": 26.2
+ },
+ "drealsr_DSC_1454": {
+  "seconds": 8.14,
+  "peak_vram_gb": 26.4
+ },
+ "drealsr_IMG_118": {
+  "seconds": 7.97,
+  "peak_vram_gb": 21.8
+ },
+ "drealsr_P1140090": {
+  "seconds": 7.99,
+  "peak_vram_gb": 26.2
+ },
+ "drealsr_P1140401": {
+  "seconds": 8.15,
+  "peak_vram_gb": 26.2
+ },
+ "drealsr_P1171051": {
+  "seconds": 8.31,
+  "peak_vram_gb": 26.2
+ },
+ "drealsr_panasonic_196": {
+  "seconds": 8.07,
+  "peak_vram_gb": 26.2
+ },
+ "drealsr_panasonic_62": {
+  "seconds": 8.01,
+  "peak_vram_gb": 20.2
+ },
+ "drealsr_sony_160": {
+  "seconds": 8.11,
+  "peak_vram_gb": 25.2
+ },
+ "lsdir_0000004": {
+  "seconds": 1.0,
+  "peak_vram_gb": 16.6
+ },
+ "lsdir_0000031": {
+  "seconds": 0.8,
+  "peak_vram_gb": 16.5
+ },
+ "lsdir_0000051": {
+  "seconds": 1.16,
+  "peak_vram_gb": 16.9
+ },
+ "lsdir_0000079": {
+  "seconds": 1.36,
+  "peak_vram_gb": 17.4
+ },
+ "lsdir_0000117": {
+  "seconds": 0.79,
+  "peak_vram_gb": 15.7
+ },
+ "lsdir_0000129": {
+  "seconds": 1.2,
+  "peak_vram_gb": 16.8
+ },
+ "lsdir_0000139": {
+  "seconds": 1.31,
+  "peak_vram_gb": 16.8
+ },
+ "lsdir_0000180": {
+  "seconds": 0.86,
+  "peak_vram_gb": 16.6
+ },
+ "lsdir_0000208": {
+  "seconds": 0.96,
+  "peak_vram_gb": 16.5
+ },
+ "lsdir_0000222": {
+  "seconds": 1.1,
+  "peak_vram_gb": 16.6
+ },
+ "krea_architecture_facade": {
+  "seconds": 5.25,
+  "peak_vram_gb": 22.8
+ },
+ "krea_beauty_hair": {
+  "seconds": 5.13,
+  "peak_vram_gb": 22.8
+ },
+ "krea_car_detail": {
+  "seconds": 5.37,
+  "peak_vram_gb": 22.8
+ },
+ "krea_fashion_suit": {
+  "seconds": 5.16,
+  "peak_vram_gb": 23.6
+ },
+ "krea_food_dessert": {
+  "seconds": 5.13,
+  "peak_vram_gb": 23.6
+ },
+ "krea_interior_chair": {
+  "seconds": 5.15,
+  "peak_vram_gb": 23.6
+ },
+ "krea_jewelry_bracelet": {
+  "seconds": 5.18,
+  "peak_vram_gb": 23.6
+ },
+ "krea_jewelry_ring": {
+  "seconds": 5.13,
+  "peak_vram_gb": 23.6
+ },
+ "krea_product_cosmetics": {
+  "seconds": 5.1,
+  "peak_vram_gb": 23.6
+ },
+ "krea_product_packaging": {
+  "seconds": 5.15,
+  "peak_vram_gb": 23.6
+ }
+}

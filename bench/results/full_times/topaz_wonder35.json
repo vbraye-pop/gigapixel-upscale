@@ -1,0 +1,452 @@
+{
+ "drealsr_Canon_10": {
+  "seconds": 12.14
+ },
+ "drealsr_Canon_14": {
+  "seconds": 15.08
+ },
+ "drealsr_Canon_42": {
+  "seconds": 15.29
+ },
+ "drealsr_Canon_56": {
+  "seconds": 11.23
+ },
+ "drealsr_DSC_1045": {
+  "seconds": 11.33
+ },
+ "drealsr_DSC_1057": {
+  "seconds": 18.47
+ },
+ "drealsr_DSC_1233": {
+  "seconds": 11.28
+ },
+ "drealsr_DSC_1241": {
+  "seconds": 11.16
+ },
+ "drealsr_DSC_1265": {
+  "seconds": 11.9
+ },
+ "drealsr_DSC_1286": {
+  "seconds": 11.57
+ },
+ "drealsr_DSC_1404": {
+  "seconds": 11.3
+ },
+ "drealsr_DSC_1425": {
+  "seconds": 12.16
+ },
+ "drealsr_DSC_1454": {
+  "seconds": 17.25
+ },
+ "drealsr_DSC_1474": {
+  "seconds": 11.31
+ },
+ "drealsr_DSC_1575": {
+  "seconds": 11.72
+ },
+ "drealsr_DSC_1599": {
+  "seconds": 21.59
+ },
+ "drealsr_DSC_1603": {
+  "seconds": 11.32
+ },
+ "drealsr_IMG_113": {
+  "seconds": 11.11
+ },
+ "drealsr_IMG_118": {
+  "seconds": 11.6
+ },
+ "drealsr_IMG_130": {
+  "seconds": 14.79
+ },
+ "drealsr_IMG_143": {
+  "seconds": 20.74
+ },
+ "drealsr_IMG_150": {
+  "seconds": 14.96
+ },
+ "drealsr_IMG_190": {
+  "seconds": 17.86
+ },
+ "drealsr_IMG_203": {
+  "seconds": 11.62
+ },
+ "drealsr_P1140090": {
+  "seconds": 14.57
+ },
+ "drealsr_P1140122": {
+  "seconds": 10.94
+ },
+ "drealsr_P1140134": {
+  "seconds": 10.76
+ },
+ "drealsr_P1140138": {
+  "seconds": 11.73
+ },
+ "drealsr_P1140189": {
+  "seconds": 14.22
+ },
+ "drealsr_P1140279": {
+  "seconds": 14.41
+ },
+ "drealsr_P1140401": {
+  "seconds": 11.13
+ },
+ "drealsr_P1140434": {
+  "seconds": 14.78
+ },
+ "drealsr_P1160566": {
+  "seconds": 14.65
+ },
+ "drealsr_P1160772": {
+  "seconds": 15.15
+ },
+ "drealsr_P1160776": {
+  "seconds": 14.47
+ },
+ "drealsr_P1171031": {
+  "seconds": 11.49
+ },
+ "drealsr_P1171051": {
+  "seconds": 12.15
+ },
+ "drealsr_panasonic_123": {
+  "seconds": 14.41
+ },
+ "drealsr_panasonic_128": {
+  "seconds": 15.0
+ },
+ "drealsr_panasonic_145": {
+  "seconds": 15.59
+ },
+ "drealsr_panasonic_16": {
+  "seconds": 11.57
+ },
+ "drealsr_panasonic_182": {
+  "seconds": 14.04
+ },
+ "drealsr_panasonic_196": {
+  "seconds": 14.94
+ },
+ "drealsr_panasonic_197": {
+  "seconds": 14.04
+ },
+ "drealsr_panasonic_206": {
+  "seconds": 14.71
+ },
+ "drealsr_panasonic_233": {
+  "seconds": 15.6
+ },
+ "drealsr_panasonic_50": {
+  "seconds": 17.24
+ },
+ "drealsr_panasonic_57": {
+  "seconds": 11.33
+ },
+ "drealsr_panasonic_62": {
+  "seconds": 17.68
+ },
+ "drealsr_panasonic_85": {
+  "seconds": 11.81
+ },
+ "drealsr_sony_107": {
+  "seconds": 11.51
+ },
+ "drealsr_sony_11": {
+  "seconds": 11.06
+ },
+ "drealsr_sony_120": {
+  "seconds": 14.27
+ },
+ "drealsr_sony_158": {
+  "seconds": 11.39
+ },
+ "drealsr_sony_160": {
+  "seconds": 17.99
+ },
+ "drealsr_sony_183": {
+  "seconds": 11.42
+ },
+ "drealsr_sony_189": {
+  "seconds": 17.7
+ },
+ "drealsr_sony_49": {
+  "seconds": 14.54
+ },
+ "drealsr_sony_53": {
+  "seconds": 11.38
+ },
+ "drealsr_sony_80": {
+  "seconds": 10.54
+ },
+ "krea_architecture_facade": {
+  "seconds": 13.92
+ },
+ "krea_beauty_closeup": {
+  "seconds": 9.84
+ },
+ "krea_beauty_group": {
+  "seconds": 9.99
+ },
+ "krea_beauty_hair": {
+  "seconds": 9.65
+ },
+ "krea_beauty_makeup": {
+  "seconds": 10.51
+ },
+ "krea_beauty_man": {
+  "seconds": 10.09
+ },
+ "krea_car_detail": {
+  "seconds": 10.14
+ },
+ "krea_fashion_dress": {
+  "seconds": 10.04
+ },
+ "krea_fashion_knit": {
+  "seconds": 10.03
+ },
+ "krea_fashion_suit": {
+  "seconds": 10.66
+ },
+ "krea_food_burger": {
+  "seconds": 10.56
+ },
+ "krea_food_coffee": {
+  "seconds": 17.06
+ },
+ "krea_food_dessert": {
+  "seconds": 16.64
+ },
+ "krea_interior_bedroom": {
+  "seconds": 10.27
+ },
+ "krea_interior_boucle": {
+  "seconds": 9.96
+ },
+ "krea_interior_chair": {
+  "seconds": 9.9
+ },
+ "krea_interior_kitchen": {
+  "seconds": 10.19
+ },
+ "krea_interior_living": {
+  "seconds": 10.62
+ },
+ "krea_jewelry_bracelet": {
+  "seconds": 10.72
+ },
+ "krea_jewelry_earrings": {
+  "seconds": 10.17
+ },
+ "krea_jewelry_necklace": {
+  "seconds": 9.91
+ },
+ "krea_jewelry_ring": {
+  "seconds": 10.09
+ },
+ "krea_jewelry_watch": {
+  "seconds": 13.48
+ },
+ "krea_landscape_mountain": {
+  "seconds": 9.66
+ },
+ "krea_product_cosmetics": {
+  "seconds": 11.26
+ },
+ "krea_product_handbag": {
+  "seconds": 13.09
+ },
+ "krea_product_headphones": {
+  "seconds": 13.57
+ },
+ "krea_product_packaging": {
+  "seconds": 10.1
+ },
+ "krea_product_perfume": {
+  "seconds": 9.93
+ },
+ "krea_product_sneaker": {
+  "seconds": 13.16
+ },
+ "lsdir_0000004": {
+  "seconds": 8.52
+ },
+ "lsdir_0000008": {
+  "seconds": 8.43
+ },
+ "lsdir_0000011": {
+  "seconds": 8.71
+ },
+ "lsdir_0000014": {
+  "seconds": 8.92
+ },
+ "lsdir_0000016": {
+  "seconds": 12.44
+ },
+ "lsdir_0000020": {
+  "seconds": 8.44
+ },
+ "lsdir_0000031": {
+  "seconds": 5.12
+ },
+ "lsdir_0000032": {
+  "seconds": 13.2
+ },
+ "lsdir_0000035": {
+  "seconds": 5.8
+ },
+ "lsdir_0000043": {
+  "seconds": 9.59
+ },
+ "lsdir_0000046": {
+  "seconds": 10.04
+ },
+ "lsdir_0000049": {
+  "seconds": 10.19
+ },
+ "lsdir_0000051": {
+  "seconds": 5.57
+ },
+ "lsdir_0000054": {
+  "seconds": 9.31
+ },
+ "lsdir_0000059": {
+  "seconds": 9.35
+ },
+ "lsdir_0000067": {
+  "seconds": 9.15
+ },
+ "lsdir_0000070": {
+  "seconds": 9.42
+ },
+ "lsdir_0000077": {
+  "seconds": 5.33
+ },
+ "lsdir_0000079": {
+  "seconds": 8.89
+ },
+ "lsdir_0000088": {
+  "seconds": 9.54
+ },
+ "lsdir_0000101": {
+  "seconds": 8.99
+ },
+ "lsdir_0000108": {
+  "seconds": 6.35
+ },
+ "lsdir_0000111": {
+  "seconds": 9.77
+ },
+ "lsdir_0000112": {
+  "seconds": 10.42
+ },
+ "lsdir_0000117": {
+  "seconds": 8.47
+ },
+ "lsdir_0000118": {
+  "seconds": 6.22
+ },
+ "lsdir_0000120": {
+  "seconds": 8.77
+ },
+ "lsdir_0000122": {
+  "seconds": 8.97
+ },
+ "lsdir_0000127": {
+  "seconds": 8.66
+ },
+ "lsdir_0000128": {
+  "seconds": 5.7
+ },
+ "lsdir_0000129": {
+  "seconds": 5.71
+ },
+ "lsdir_0000132": {
+  "seconds": 6.04
+ },
+ "lsdir_0000133": {
+  "seconds": 12.04
+ },
+ "lsdir_0000134": {
+  "seconds": 6.49
+ },
+ "lsdir_0000136": {
+  "seconds": 9.16
+ },
+ "lsdir_0000138": {
+  "seconds": 8.96
+ },
+ "lsdir_0000139": {
+  "seconds": 8.81
+ },
+ "lsdir_0000146": {
+  "seconds": 12.14
+ },
+ "lsdir_0000147": {
+  "seconds": 8.68
+ },
+ "lsdir_0000154": {
+  "seconds": 6.53
+ },
+ "lsdir_0000158": {
+  "seconds": 5.85
+ },
+ "lsdir_0000166": {
+  "seconds": 9.85
+ },
+ "lsdir_0000180": {
+  "seconds": 8.57
+ },
+ "lsdir_0000191": {
+  "seconds": 5.77
+ },
+ "lsdir_0000192": {
+  "seconds": 5.37
+ },
+ "lsdir_0000197": {
+  "seconds": 6.29
+ },
+ "lsdir_0000205": {
+  "seconds": 5.8
+ },
+ "lsdir_0000207": {
+  "seconds": 9.04
+ },
+ "lsdir_0000208": {
+  "seconds": 5.28
+ },
+ "lsdir_0000210": {
+  "seconds": 6.62
+ },
+ "lsdir_0000212": {
+  "seconds": 8.85
+ },
+ "lsdir_0000215": {
+  "seconds": 9.06
+ },
+ "lsdir_0000217": {
+  "seconds": 9.34
+ },
+ "lsdir_0000221": {
+  "seconds": 5.95
+ },
+ "lsdir_0000222": {
+  "seconds": 5.32
+ },
+ "lsdir_0000231": {
+  "seconds": 8.73
+ },
+ "lsdir_0000240": {
+  "seconds": 6.17
+ },
+ "lsdir_0000242": {
+  "seconds": 6.09
+ },
+ "lsdir_0000247": {
+  "seconds": 8.45
+ },
+ "lsdir_0000249": {
+  "seconds": 10.11
+ }
+}
