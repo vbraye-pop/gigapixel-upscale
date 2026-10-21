@@ -86,7 +86,9 @@ uv run gigapixel-upscale poster out/photo_master.png     # local stage, writes o
 #### Options
 
 - `--camera`: soft or noisy camera shot, use RealESRGAN instead of the blend.
-- `--detail 0.75`: SeedVR2's share of fine detail. `0` is plain Nomos2, worth trying on very smooth fabric.
+- `--detail-source`: model for the fine detail, `seedvr2-7b` by default. Also `seedvr2-7b-sharp` and `seedvr2-3b` (their model file must be in `models/diffusion_models`, from [Comfy-Org/SeedVR2](https://huggingface.co/Comfy-Org/SeedVR2)), and `topaz-wonder` or `topaz-redefine`, which call the Topaz API from your machine with the key in `$TOPAZ_API_KEY` (about $2 per 8192 px master). See [bench](bench/) for how they compare.
+- `--detail`: share of the detail source. The default is the best share measured for each source, 0.75 for SeedVR2 7B. `0` is plain Nomos2, worth trying on very smooth fabric.
+- `--sigma 0.75`: blur that splits tones (from Nomos2) from fine detail.
 - `--server URL`: ComfyUI address, defaults to `$COMFY_URL`.
 - `--megapixels 1674` or `--long-side PX`: poster size, aspect kept. The default is the 4 x 3 m at 300 DPI budget.
 - `--dpi 300`: DPI written in the file. It only changes the tag, never the pixels.

@@ -50,3 +50,19 @@ def test_links_cannot_be_overwritten(template):
 def test_an_unknown_input_is_refused(template):
     with pytest.raises(GraphError, match="has no input"):
         set_input(template, graph.MASTER, "nope", 1)
+
+
+def test_prepare_sets_the_seedvr2_variant_and_sigma(template):
+    g = prepare(template, "x.png", seedvr2="seedvr2-3b", sigma=1.0)
+    assert g[graph.find_class(g, "UNETLoader")]["inputs"]["unet_name"] == "seedvr2_3b_fp16.safetensors"
+    assert g[find(g, graph.NOMOS_LOW)]["inputs"]["sigma"] == 1.0
+    assert g[find(g, graph.DETAIL_LOW)]["inputs"]["sigma"] == 1.0
+
+
+def test_a_detail_image_replaces_seedvr2_and_its_branch_is_pruned(template):
+    g = prepare(template, "x.png", detail_image="topaz.png")
+    assert not any(n["class_type"].startswith("SeedVR2") or n["class_type"] == "UNETLoader" for n in g.values())
+    src, _ = g[find(g, graph.DETAIL)]["inputs"]["image2"]
+    resize = g[src]["inputs"]
+    assert g[resize["image"][0]]["inputs"]["image"] == "topaz.png"
+    assert resize["width"] == [find(g, graph.STAGE1), 1] and resize["height"] == [find(g, graph.STAGE1), 2]

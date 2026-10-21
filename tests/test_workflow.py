@@ -66,3 +66,14 @@ def test_every_model_loader_carries_a_download_link_and_hash():
         assert model["url"].startswith("https://")
         assert model["name"] == node["widgets_values"][0]
         assert len(model["hash"]) == 64
+
+
+def test_the_graph_with_a_detail_image_is_still_valid():
+    g = graph.prepare(API, "x.png", detail_image="topaz.png")
+    for nid, node in g.items():
+        required, optional = declared_inputs(node["class_type"])
+        assert set(node["inputs"]) <= set(required) | set(optional), nid
+        assert set(required) <= set(node["inputs"]), nid
+        for value in node["inputs"].values():
+            if isinstance(value, list):
+                assert value[0] in g and value[1] < len(OBJECT_INFO[g[value[0]]["class_type"]]["output"])

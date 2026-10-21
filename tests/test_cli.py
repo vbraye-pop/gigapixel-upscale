@@ -84,3 +84,32 @@ def test_a_missing_server_is_a_clean_error_not_a_traceback(tmp_path, monkeypatch
         cli.main(["run", str(source)])
     assert exit_.value.code == 1
     assert "COMFY_URL" in capsys.readouterr().err
+
+
+def test_each_detail_source_gets_its_benchmark_share(fake_server, tmp_path):
+    source = write_image(tmp_path / "cat.png", 2048, 1536)
+    cli.main(["run", str(source), "--server", "http://x", "--detail-source", "seedvr2-7b-sharp", "-o", str(tmp_path)])
+    assert queued(graph.DETAIL, "blend_factor") == 0.5
+
+
+def test_a_topaz_source_without_a_key_is_a_clean_error(fake_server, tmp_path, monkeypatch, capsys):
+    monkeypatch.delenv("TOPAZ_API_KEY", raising=False)
+    source = write_image(tmp_path / "cat.png", 2048, 1536)
+    with pytest.raises(SystemExit):
+        cli.main(["run", str(source), "--server", "http://x", "--detail-source", "topaz-wonder", "-o", str(tmp_path)])
+    assert "TOPAZ_API_KEY" in capsys.readouterr().err
+
+
+def test_a_topaz_result_is_uploaded_and_feeds_the_blend(fake_server, tmp_path, monkeypatch):
+    sizes = []
+
+    def fake_topaz(name, png, w, h):
+        sizes.append((w, h))
+        return pyvips.Image.black(w, h, bands=3).pngsave_buffer()
+
+    monkeypatch.setattr(cli.apis, "topaz", fake_topaz)
+    source = write_image(tmp_path / "cat.png", 2048, 1536)
+    cli.main(["run", str(source), "--server", "http://x", "--detail-source", "topaz-wonder", "-o", str(tmp_path)])
+    assert sizes == [(8192, 6144)]
+    assert queued("Detail source", "image") == "up_cat_topaz-wonder.png"
+    assert queued(graph.DETAIL, "blend_factor") == 0.75

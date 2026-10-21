@@ -7,11 +7,21 @@ from pathlib import Path
 
 import pyvips
 
-from . import graph
+from . import apis, graph
+from .apis import ApiError
 from .comfy import Comfy, ComfyError
 from .graph import GraphError
 from .poster import make_poster
 from .sizes import BOX, POSTER_MEGAPIXELS, stage1_size
+
+# best detail share per source, measured in bench/
+BEST_DETAIL = {
+    "seedvr2-7b": 0.75,
+    "seedvr2-7b-sharp": 0.5,
+    "seedvr2-3b": 0.75,
+    "topaz-wonder": 0.75,
+    "topaz-redefine": 0.25,
+}
 
 
 def progress(status: str, elapsed: float) -> None:
@@ -30,12 +40,31 @@ def run(args: argparse.Namespace) -> Path:
         )
     box = (width, height) if capped else (BOX, BOX)
 
+    detail = BEST_DETAIL[args.detail_source] if args.detail is None else args.detail
     comfy = Comfy(args.server)
     print(f"uploading {source.name} to {comfy.url}", file=sys.stderr)
     name = comfy.upload(source)
-    prompt = graph.prepare(graph.load(), name, camera=args.camera, detail=args.detail, box=box)
+    detail_image = None
+    if args.detail_source in apis.MODELS and not args.camera:
+        print(f"{args.detail_source}: upscaling {source.name} to {width} x {height}", file=sys.stderr)
+        result = apis.topaz(args.detail_source, header.pngsave_buffer(), width, height)
+        args.out_dir.mkdir(parents=True, exist_ok=True)
+        detail_path = args.out_dir / f"{source.stem}_{args.detail_source}.png"
+        detail_path.write_bytes(result)
+        detail_image = comfy.upload(detail_path)
+    seedvr2 = args.detail_source if args.detail_source in graph.SEEDVR2 else "seedvr2-7b"
+    prompt = graph.prepare(
+        graph.load(),
+        name,
+        camera=args.camera,
+        detail=detail,
+        box=box,
+        seedvr2=seedvr2,
+        sigma=args.sigma,
+        detail_image=detail_image,
+    )
     prompt_id = comfy.submit(prompt)
-    mode = "camera photo (RealESRGAN)" if args.camera else f"blend (detail {args.detail})"
+    mode = "camera photo (RealESRGAN)" if args.camera else f"blend ({args.detail_source}, detail {detail})"
     print(f"queued {prompt_id}, {mode}, master about {width} x {height}", file=sys.stderr)
     try:
         outputs = comfy.wait(prompt_id, on_status=progress)
@@ -71,7 +100,16 @@ def add_run_options(p: argparse.ArgumentParser) -> None:
     p.add_argument("image", type=Path, help="source image, at least 2048 px on the long side")
     p.add_argument("--server", default=os.environ.get("COMFY_URL"), help="ComfyUI URL (default: $COMFY_URL)")
     p.add_argument("--camera", action="store_true", help="soft or noisy camera shot: use RealESRGAN, skip the blend")
-    p.add_argument("--detail", type=float, default=0.75, help="SeedVR2 share of fine detail, 0 = plain Nomos2")
+    p.add_argument(
+        "--detail-source",
+        choices=list(BEST_DETAIL),
+        default="seedvr2-7b",
+        help="model for the fine detail (default: seedvr2-7b). topaz-* need $TOPAZ_API_KEY",
+    )
+    p.add_argument(
+        "--detail", type=float, help="share of the detail source, 0 = plain Nomos2 (default: best per source)"
+    )
+    p.add_argument("--sigma", type=float, default=0.75, help="blur sigma splitting tones from detail (default: 0.75)")
     p.add_argument("-o", "--out-dir", type=Path, default=Path("out"), help="where the master goes (default: out)")
 
 
@@ -119,7 +157,7 @@ def main(argv: list[str] | None = None) -> None:
             poster(args, run(args), args.image)
     except KeyboardInterrupt:
         sys.exit(130)
-    except (ComfyError, GraphError, pyvips.Error, OSError) as e:
+    except (ApiError, ComfyError, GraphError, pyvips.Error, OSError) as e:
         print(f"\nerror: {e}", file=sys.stderr)
         sys.exit(1)
 
