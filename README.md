@@ -8,6 +8,29 @@ It runs in two stages. A ComfyUI workflow takes the source to an 8192 px master 
 
 ## How it works
 
+```mermaid
+flowchart LR
+    S[Source] --> B["Fit in 8192 box<br/>at most 4x"]
+    subgraph stage1 ["Stage 1, ComfyUI on a GPU"]
+        B --> Q[Quarter size]
+        Q --> N[Nomos2 4x]
+        Q --> R[RealESRGAN 4x]
+        B --> V["SeedVR2 7B<br/>or another detail source"]
+        N --> M["Detail mix<br/>0.25 Nomos2 + 0.75 SeedVR2"]
+        V --> M
+        N --> L["Tones<br/>blur Nomos2, σ 0.75"]
+        M --> H["Fine detail<br/>mix minus blur of mix"]
+        L --> P((+))
+        H --> P
+        P -- false --> C{Camera switch}
+        R -- true --> C
+        C --> MA[8192 px master]
+    end
+    subgraph stage2 ["Stage 2, any machine"]
+        MA --> T["Resize to 1.67 GP<br/>300 DPI TIFF"]
+    end
+```
+
 1. The source is fitted into an 8192 x 8192 box (never more than 4x, past that SeedVR2 invents material).
 2. **Nomos2** (4x, faithful and clean) and **SeedVR2 7B** (one-step diffusion, adds real texture) both upscale it to that size. SeedVR2 can be swapped for any other generative upscaler, see below.
 3. A frequency blend keeps tones and shapes from Nomos2 and takes fine texture from a 25/75 Nomos2/SeedVR2 mix. That beats either model alone on AI renders and clean photos.
