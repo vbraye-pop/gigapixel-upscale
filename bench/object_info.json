@@ -1,0 +1,1908 @@
+{
+ "BasicScheduler": {
+  "input": {
+   "required": {
+    "model": [
+     "MODEL",
+     {}
+    ],
+    "scheduler": [
+     "COMBO",
+     {
+      "multiselect": false,
+      "options": [
+       "simple",
+       "sgm_uniform",
+       "karras",
+       "exponential",
+       "ddim_uniform",
+       "beta",
+       "normal",
+       "linear_quadratic",
+       "kl_optimal"
+      ]
+     }
+    ],
+    "steps": [
+     "INT",
+     {
+      "default": 20,
+      "min": 1,
+      "max": 10000
+     }
+    ],
+    "denoise": [
+     "FLOAT",
+     {
+      "default": 1.0,
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.01
+     }
+    ]
+   }
+  },
+  "output": [
+   "SIGMAS"
+  ]
+ },
+ "CFGGuider": {
+  "input": {
+   "required": {
+    "model": [
+     "MODEL",
+     {}
+    ],
+    "positive": [
+     "CONDITIONING",
+     {}
+    ],
+    "negative": [
+     "CONDITIONING",
+     {}
+    ],
+    "cfg": [
+     "FLOAT",
+     {
+      "default": 8.0,
+      "min": 0.0,
+      "max": 100.0,
+      "step": 0.1,
+      "round": 0.01
+     }
+    ]
+   }
+  },
+  "output": [
+   "GUIDER"
+  ]
+ },
+ "CLIPLoader": {
+  "input": {
+   "required": {
+    "clip_name": [
+     [
+      "Qwen3-VL-4B-Instruct/model-00001-of-00002.safetensors",
+      "Qwen3-VL-4B-Instruct/model-00002-of-00002.safetensors",
+      "qwen3vl_4b_bf16.safetensors",
+      "qwen3vl_8b_bf16.safetensors",
+      "qwen_3_4b.safetensors",
+      "qwen_3_8b_fp8mixed.safetensors"
+     ]
+    ],
+    "type": [
+     [
+      "stable_diffusion",
+      "stable_cascade",
+      "sd3",
+      "stable_audio",
+      "mochi",
+      "ltxv",
+      "pixart",
+      "cosmos",
+      "lumina2",
+      "wan",
+      "hidream",
+      "chroma",
+      "ace",
+      "omnigen2",
+      "qwen_image",
+      "hunyuan_image",
+      "flux2",
+      "ovis",
+      "longcat_image",
+      "cogvideox",
+      "lens",
+      "pixeldit",
+      "ideogram4",
+      "boogu",
+      "krea2",
+      "joyimage",
+      "mage",
+      "minimax",
+      "yue2",
+      "flux3",
+      "moss_image"
+     ]
+    ]
+   },
+   "optional": {
+    "device": [
+     [
+      "default",
+      "cpu"
+     ],
+     {
+      "advanced": true
+     }
+    ]
+   }
+  },
+  "output": [
+   "CLIP"
+  ]
+ },
+ "CLIPTextEncode": {
+  "input": {
+   "required": {
+    "text": [
+     "STRING",
+     {
+      "multiline": true,
+      "dynamicPrompts": true,
+      "tooltip": "The text to be encoded."
+     }
+    ],
+    "clip": [
+     "CLIP",
+     {
+      "tooltip": "The CLIP model used for encoding the text."
+     }
+    ]
+   }
+  },
+  "output": [
+   "CONDITIONING"
+  ]
+ },
+ "CLIPTextEncodeSDXL": {
+  "input": {
+   "required": {
+    "clip": [
+     "CLIP",
+     {}
+    ],
+    "width": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 0,
+      "max": 16384
+     }
+    ],
+    "height": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 0,
+      "max": 16384
+     }
+    ],
+    "crop_w": [
+     "INT",
+     {
+      "advanced": true,
+      "default": 0,
+      "min": 0,
+      "max": 16384
+     }
+    ],
+    "crop_h": [
+     "INT",
+     {
+      "advanced": true,
+      "default": 0,
+      "min": 0,
+      "max": 16384
+     }
+    ],
+    "target_width": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 0,
+      "max": 16384
+     }
+    ],
+    "target_height": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 0,
+      "max": 16384
+     }
+    ],
+    "text_g": [
+     "STRING",
+     {
+      "multiline": true,
+      "dynamicPrompts": true
+     }
+    ],
+    "text_l": [
+     "STRING",
+     {
+      "multiline": true,
+      "dynamicPrompts": true
+     }
+    ]
+   }
+  },
+  "output": [
+   "CONDITIONING"
+  ]
+ },
+ "CheckpointLoaderSimple": {
+  "input": {
+   "required": {
+    "ckpt_name": [
+     [
+      "SUPIR-v0Q_fp16.safetensors",
+      "juggernautXL_v9.safetensors"
+     ],
+     {
+      "tooltip": "The name of the checkpoint (model) to load."
+     }
+    ]
+   }
+  },
+  "output": [
+   "MODEL",
+   "CLIP",
+   "VAE"
+  ]
+ },
+ "ColorTransfer": {
+  "input": {
+   "required": {
+    "image_target": [
+     "IMAGE",
+     {
+      "tooltip": "Image(s) to apply the color transform to."
+     }
+    ],
+    "image_ref": [
+     "IMAGE",
+     {
+      "tooltip": "Reference image(s) to match colors to."
+     }
+    ],
+    "method": [
+     "COMBO",
+     {
+      "multiselect": false,
+      "options": [
+       "reinhard_lab",
+       "mkl_lab",
+       "histogram"
+      ]
+     }
+    ],
+    "source_stats": [
+     "COMFY_DYNAMICCOMBO_V3",
+     {
+      "tooltip": "per_frame: each frame matched to image_ref individually. uniform: pool stats across all source frames as baseline, match to image_ref. target_frame: use one chosen frame as the baseline for the transform to image_ref, applied uniformly to all frames (preserves relative differences)",
+      "options": [
+       {
+        "key": "per_frame",
+        "inputs": {
+         "required": {}
+        }
+       },
+       {
+        "key": "uniform",
+        "inputs": {
+         "required": {}
+        }
+       },
+       {
+        "key": "target_frame",
+        "inputs": {
+         "required": {
+          "target_index": [
+           "INT",
+           {
+            "tooltip": "Frame index used as the source baseline for computing the transform to image_ref",
+            "default": 0,
+            "min": 0,
+            "max": 10000
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    ],
+    "strength": [
+     "FLOAT",
+     {
+      "default": 1.0,
+      "min": 0.0,
+      "max": 10.0,
+      "step": 0.01
+     }
+    ]
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ },
+ "ConditioningZeroOut": {
+  "input": {
+   "required": {
+    "conditioning": [
+     "CONDITIONING"
+    ]
+   }
+  },
+  "output": [
+   "CONDITIONING"
+  ]
+ },
+ "EmptyChromaRadianceLatentImage": {
+  "input": {
+   "required": {
+    "width": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 16
+     }
+    ],
+    "height": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 16
+     }
+    ],
+    "batch_size": [
+     "INT",
+     {
+      "default": 1,
+      "min": 1,
+      "max": 4096
+     }
+    ]
+   }
+  },
+  "output": [
+   "LATENT"
+  ]
+ },
+ "EmptyFlux2LatentImage": {
+  "input": {
+   "required": {
+    "width": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 16
+     }
+    ],
+    "height": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 16
+     }
+    ],
+    "batch_size": [
+     "INT",
+     {
+      "default": 1,
+      "min": 1,
+      "max": 4096
+     }
+    ]
+   }
+  },
+  "output": [
+   "LATENT"
+  ]
+ },
+ "EmptyLatentImage": {
+  "input": {
+   "required": {
+    "width": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 8,
+      "tooltip": "The width of the latent images in pixels."
+     }
+    ],
+    "height": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 8,
+      "tooltip": "The height of the latent images in pixels."
+     }
+    ],
+    "batch_size": [
+     "INT",
+     {
+      "default": 1,
+      "min": 1,
+      "max": 4096,
+      "tooltip": "The number of latent images in the batch."
+     }
+    ]
+   }
+  },
+  "output": [
+   "LATENT"
+  ]
+ },
+ "Flux2Scheduler": {
+  "input": {
+   "required": {
+    "steps": [
+     "INT",
+     {
+      "default": 20,
+      "min": 1,
+      "max": 4096
+     }
+    ],
+    "width": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 1
+     }
+    ],
+    "height": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 1
+     }
+    ]
+   }
+  },
+  "output": [
+   "SIGMAS"
+  ]
+ },
+ "ImageResizeKJv2": {
+  "input": {
+   "required": {
+    "image": [
+     "IMAGE"
+    ],
+    "width": [
+     "INT",
+     {
+      "default": 512,
+      "min": 0,
+      "max": 16384,
+      "step": 1
+     }
+    ],
+    "height": [
+     "INT",
+     {
+      "default": 512,
+      "min": 0,
+      "max": 16384,
+      "step": 1
+     }
+    ],
+    "upscale_method": [
+     [
+      "nearest-exact",
+      "bilinear",
+      "area",
+      "bicubic",
+      "lanczos",
+      "nvidia_rtx_vsr"
+     ]
+    ],
+    "keep_proportion": [
+     [
+      "stretch",
+      "resize",
+      "pad",
+      "pad_edge",
+      "pad_edge_pixel",
+      "crop",
+      "pillarbox_blur",
+      "total_pixels"
+     ],
+     {
+      "default": false
+     }
+    ],
+    "pad_color": [
+     "STRING",
+     {
+      "default": "0, 0, 0",
+      "tooltip": "Color to use for padding."
+     }
+    ],
+    "crop_position": [
+     [
+      "center",
+      "top",
+      "bottom",
+      "left",
+      "right"
+     ],
+     {
+      "default": "center"
+     }
+    ],
+    "divisible_by": [
+     "INT",
+     {
+      "default": 2,
+      "min": 0,
+      "max": 512,
+      "step": 1
+     }
+    ]
+   },
+   "optional": {
+    "mask": [
+     "MASK"
+    ],
+    "device": [
+     [
+      "cpu",
+      "gpu"
+     ]
+    ]
+   },
+   "hidden": {
+    "unique_id": "UNIQUE_ID"
+   }
+  },
+  "output": [
+   "IMAGE",
+   "INT",
+   "INT",
+   "MASK"
+  ]
+ },
+ "ImageScale": {
+  "input": {
+   "required": {
+    "image": [
+     "IMAGE"
+    ],
+    "upscale_method": [
+     [
+      "nearest-exact",
+      "bilinear",
+      "area",
+      "bicubic",
+      "lanczos"
+     ]
+    ],
+    "width": [
+     "INT",
+     {
+      "default": 512,
+      "min": 0,
+      "max": 16384,
+      "step": 1
+     }
+    ],
+    "height": [
+     "INT",
+     {
+      "default": 512,
+      "min": 0,
+      "max": 16384,
+      "step": 1
+     }
+    ],
+    "crop": [
+     [
+      "disabled",
+      "center"
+     ]
+    ]
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ },
+ "ImageUpscaleWithModel": {
+  "input": {
+   "required": {
+    "upscale_model": [
+     "UPSCALE_MODEL",
+     {}
+    ],
+    "image": [
+     "IMAGE",
+     {}
+    ]
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ },
+ "IrisUpscale": {
+  "input": {
+   "required": {
+    "upscaler": [
+     "IRIS_UPSCALER"
+    ],
+    "image": [
+     "IMAGE"
+    ],
+    "scale": [
+     "FLOAT",
+     {
+      "default": 4.0,
+      "min": 1.0,
+      "max": 4.0,
+      "step": 0.5,
+      "tooltip": "trained for 4x. Lower values restore at a smaller size"
+     }
+    ],
+    "limit_input_size": [
+     "BOOLEAN",
+     {
+      "default": true,
+      "tooltip": "shrink the input first so its short side is at most 512 px and its long side at most 1024 px (at 4x: at most 2048x4096, 21 tiles). Off keeps the input size, and the time grows with the output area"
+     }
+    ],
+    "color_fix": [
+     "BOOLEAN",
+     {
+      "default": true,
+      "tooltip": "keep the input's colors (wavelet color fix)"
+     }
+    ]
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ },
+ "IrisUpscalerLoader": {
+  "input": {
+   "required": {
+    "model_name": [
+     [
+      "iris-3b-upscaler.safetensors"
+     ],
+     {
+      "tooltip": "Iris upscaler weights in models/diffusion_models. iris-3b-upscaler.safetensors is downloaded on first use if missing (12 GB)"
+     }
+    ],
+    "weight_dtype": [
+     [
+      "bf16",
+      "fp32"
+     ],
+     {
+      "default": "bf16",
+      "tooltip": "bf16 = 6 GB on the GPU. fp32 = 12 GB (the shipped precision) and needs well over 16 GB VRAM"
+     }
+    ]
+   }
+  },
+  "output": [
+   "IRIS_UPSCALER"
+  ]
+ },
+ "KSampler": {
+  "input": {
+   "required": {
+    "model": [
+     "MODEL",
+     {
+      "tooltip": "The model used for denoising the input latent."
+     }
+    ],
+    "seed": [
+     "INT",
+     {
+      "default": 0,
+      "min": 0,
+      "max": 18446744073709551615,
+      "control_after_generate": true,
+      "tooltip": "The random seed used for creating the noise."
+     }
+    ],
+    "steps": [
+     "INT",
+     {
+      "default": 20,
+      "min": 1,
+      "max": 10000,
+      "tooltip": "The number of steps used in the denoising process."
+     }
+    ],
+    "cfg": [
+     "FLOAT",
+     {
+      "default": 8.0,
+      "min": 0.0,
+      "max": 100.0,
+      "step": 0.1,
+      "round": 0.01,
+      "tooltip": "The Classifier-Free Guidance scale balances creativity and adherence to the prompt. Higher values result in images more closely matching the prompt however too high values will negatively impact quality."
+     }
+    ],
+    "sampler_name": [
+     [
+      "euler",
+      "euler_cfg_pp",
+      "euler_ancestral",
+      "euler_ancestral_cfg_pp",
+      "heun",
+      "heunpp2",
+      "exp_heun_2_x0",
+      "exp_heun_2_x0_sde",
+      "dpm_2",
+      "dpm_2_ancestral",
+      "lms",
+      "dpm_fast",
+      "dpm_adaptive",
+      "dpmpp_2s_ancestral",
+      "dpmpp_2s_ancestral_cfg_pp",
+      "dpmpp_sde",
+      "dpmpp_sde_gpu",
+      "dpmpp_2m",
+      "dpmpp_2m_cfg_pp",
+      "dpmpp_2m_sde",
+      "dpmpp_2m_sde_gpu",
+      "dpmpp_2m_sde_heun",
+      "dpmpp_2m_sde_heun_gpu",
+      "dpmpp_3m_sde",
+      "dpmpp_3m_sde_gpu",
+      "ddpm",
+      "lcm",
+      "ipndm",
+      "ipndm_v",
+      "deis",
+      "cfgpp_ud10_ab",
+      "res_multistep",
+      "res_multistep_cfg_pp",
+      "res_multistep_ancestral",
+      "res_multistep_ancestral_cfg_pp",
+      "gradient_estimation",
+      "gradient_estimation_cfg_pp",
+      "er_sde",
+      "seeds_2",
+      "seeds_3",
+      "sa_solver",
+      "sa_solver_pece",
+      "ddim",
+      "uni_pc",
+      "uni_pc_bh2"
+     ],
+     {
+      "tooltip": "The algorithm used when sampling, this can affect the quality, speed, and style of the generated output."
+     }
+    ],
+    "scheduler": [
+     [
+      "simple",
+      "sgm_uniform",
+      "karras",
+      "exponential",
+      "ddim_uniform",
+      "beta",
+      "normal",
+      "linear_quadratic",
+      "kl_optimal"
+     ],
+     {
+      "tooltip": "The scheduler controls how noise is gradually removed to form the image."
+     }
+    ],
+    "positive": [
+     "CONDITIONING",
+     {
+      "tooltip": "The conditioning describing the attributes you want to include in the image."
+     }
+    ],
+    "negative": [
+     "CONDITIONING",
+     {
+      "tooltip": "The conditioning describing the attributes you want to exclude from the image."
+     }
+    ],
+    "latent_image": [
+     "LATENT",
+     {
+      "tooltip": "The latent image to denoise."
+     }
+    ],
+    "denoise": [
+     "FLOAT",
+     {
+      "default": 1.0,
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.01,
+      "tooltip": "The amount of denoising applied, lower values will maintain the structure of the initial image allowing for image to image sampling."
+     }
+    ]
+   }
+  },
+  "output": [
+   "LATENT"
+  ]
+ },
+ "KSamplerSelect": {
+  "input": {
+   "required": {
+    "sampler_name": [
+     "COMBO",
+     {
+      "multiselect": false,
+      "options": [
+       "euler",
+       "euler_cfg_pp",
+       "euler_ancestral",
+       "euler_ancestral_cfg_pp",
+       "heun",
+       "heunpp2",
+       "exp_heun_2_x0",
+       "exp_heun_2_x0_sde",
+       "dpm_2",
+       "dpm_2_ancestral",
+       "lms",
+       "dpm_fast",
+       "dpm_adaptive",
+       "dpmpp_2s_ancestral",
+       "dpmpp_2s_ancestral_cfg_pp",
+       "dpmpp_sde",
+       "dpmpp_sde_gpu",
+       "dpmpp_2m",
+       "dpmpp_2m_cfg_pp",
+       "dpmpp_2m_sde",
+       "dpmpp_2m_sde_gpu",
+       "dpmpp_2m_sde_heun",
+       "dpmpp_2m_sde_heun_gpu",
+       "dpmpp_3m_sde",
+       "dpmpp_3m_sde_gpu",
+       "ddpm",
+       "lcm",
+       "ipndm",
+       "ipndm_v",
+       "deis",
+       "cfgpp_ud10_ab",
+       "res_multistep",
+       "res_multistep_cfg_pp",
+       "res_multistep_ancestral",
+       "res_multistep_ancestral_cfg_pp",
+       "gradient_estimation",
+       "gradient_estimation_cfg_pp",
+       "er_sde",
+       "seeds_2",
+       "seeds_3",
+       "sa_solver",
+       "sa_solver_pece",
+       "ddim",
+       "uni_pc",
+       "uni_pc_bh2"
+      ]
+     }
+    ]
+   }
+  },
+  "output": [
+   "SAMPLER"
+  ]
+ },
+ "LoadImage": {
+  "input": {
+   "required": {
+    "image": [
+     [],
+     {
+      "image_upload": true
+     }
+    ]
+   }
+  },
+  "output": [
+   "IMAGE",
+   "MASK"
+  ]
+ },
+ "ModelPatchLoader": {
+  "input": {
+   "required": {
+    "name": [
+     []
+    ]
+   }
+  },
+  "output": [
+   "MODEL_PATCH"
+  ]
+ },
+ "ModelSamplingFlux": {
+  "input": {
+   "required": {
+    "model": [
+     "MODEL"
+    ],
+    "max_shift": [
+     "FLOAT",
+     {
+      "default": 1.15,
+      "min": 0.0,
+      "max": 100.0,
+      "step": 0.01,
+      "advanced": true
+     }
+    ],
+    "base_shift": [
+     "FLOAT",
+     {
+      "default": 0.5,
+      "min": 0.0,
+      "max": 100.0,
+      "step": 0.01,
+      "advanced": true
+     }
+    ],
+    "width": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 8
+     }
+    ],
+    "height": [
+     "INT",
+     {
+      "default": 1024,
+      "min": 16,
+      "max": 16384,
+      "step": 8
+     }
+    ]
+   }
+  },
+  "output": [
+   "MODEL"
+  ]
+ },
+ "PiDColorBiasCorrection": {
+  "input": {
+   "required": {
+    "model": [
+     "MODEL"
+    ],
+    "strength": [
+     "FLOAT",
+     {
+      "default": 1.0,
+      "min": -20.0,
+      "max": 20.0,
+      "step": 0.01,
+      "tooltip": "Correction strength. 1.0 = full predicted bias subtracted. <1 = milder, >1 = stronger, 0 = disabled."
+     }
+    ],
+    "backbone": [
+     [
+      "flux2"
+     ],
+     {
+      "default": "flux2",
+      "tooltip": "Calibrated PiD backbone (currently only flux2 \u2014 others use the same model but coefficients differ)."
+     }
+    ]
+   }
+  },
+  "output": [
+   "MODEL"
+  ]
+ },
+ "PiDConditioning": {
+  "input": {
+   "required": {
+    "positive": [
+     "CONDITIONING",
+     {}
+    ],
+    "latent": [
+     "LATENT",
+     {
+      "tooltip": "latent (from VAEEncode or a KSampler)."
+     }
+    ],
+    "latent_format": [
+     "COMBO",
+     {
+      "tooltip": "Flux1 (16-ch) and Flux2 (128-ch) latents are auto-detected from channel dim under 'flux'. For SD3 (16-ch), SDXL (4-ch), or QwenImage (16-ch), select manually.",
+      "default": "flux",
+      "multiselect": false,
+      "options": [
+       "flux",
+       "sd3",
+       "sdxl",
+       "qwenimage"
+      ]
+     }
+    ],
+    "degrade_sigma": [
+     "FLOAT",
+     {
+      "tooltip": "0 = clean latent. Increase to denoise corrupted latent outputs.",
+      "default": 0.0,
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.01
+     }
+    ]
+   }
+  },
+  "output": [
+   "CONDITIONING"
+  ]
+ },
+ "QwenImage21Cache": {
+  "input": {
+   "required": {
+    "model": [
+     "MODEL",
+     {}
+    ],
+    "device": [
+     "COMBO",
+     {
+      "tooltip": "auto uses spare VRAM, then RAM. cpu (RAM) is prefetched behind compute and costs little speed. off recomputes the prefix every step, which is slower but is the one way to rule the cache out.",
+      "default": "auto",
+      "multiselect": false,
+      "options": [
+       "auto",
+       "gpu",
+       "cpu",
+       "off"
+      ]
+     }
+    ],
+    "dtype": [
+     "COMBO",
+     {
+      "tooltip": "Storage precision. default is lossless. int8 halves the cache at about bf16 accuracy, int4 quarters it but roughly doubles the per-step error.",
+      "default": "default",
+      "multiselect": false,
+      "options": [
+       "default",
+       "int8",
+       "int4"
+      ]
+     }
+    ]
+   }
+  },
+  "output": [
+   "MODEL"
+  ]
+ },
+ "RandomNoise": {
+  "input": {
+   "required": {
+    "noise_seed": [
+     "INT",
+     {
+      "default": 0,
+      "min": 0,
+      "max": 18446744073709551615,
+      "control_after_generate": true
+     }
+    ]
+   }
+  },
+  "output": [
+   "NOISE"
+  ]
+ },
+ "ReferenceLatent": {
+  "input": {
+   "required": {
+    "conditioning": [
+     "CONDITIONING",
+     {}
+    ]
+   },
+   "optional": {
+    "latent": [
+     "LATENT",
+     {}
+    ]
+   }
+  },
+  "output": [
+   "CONDITIONING"
+  ]
+ },
+ "ReferenceMultiLatent": {
+  "input": {
+   "required": {
+    "positive": [
+     "CONDITIONING",
+     {}
+    ],
+    "resolution": [
+     "COMFY_DYNAMICCOMBO_V3",
+     {
+      "options": [
+       {
+        "key": "keep resolution",
+        "inputs": {
+         "required": {}
+        }
+       },
+       {
+        "key": "resize",
+        "inputs": {
+         "required": {
+          "megapixels": [
+           "FLOAT",
+           {
+            "tooltip": "Target size of each reference image, preserving aspect ratio. 1.0 is about 1024 x 1024 pixels.",
+            "default": 1.0,
+            "min": 0.01,
+            "max": 16.0,
+            "step": 0.01
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "optional": {
+    "negative": [
+     "CONDITIONING",
+     {}
+    ],
+    "vae": [
+     "VAE",
+     {
+      "tooltip": "Reference images are ignored when no VAE is connected."
+     }
+    ],
+    "images": [
+     "COMFY_AUTOGROW_V3",
+     {
+      "template": {
+       "input": {
+        "required": {},
+        "optional": {
+         "image": [
+          "IMAGE",
+          {}
+         ]
+        }
+       },
+       "prefix": "image",
+       "min": 1,
+       "max": 100
+      }
+     }
+    ]
+   }
+  },
+  "output": [
+   "CONDITIONING",
+   "CONDITIONING",
+   "LATENT"
+  ]
+ },
+ "SUPIRApply": {
+  "input": {
+   "required": {
+    "model": [
+     "MODEL",
+     {}
+    ],
+    "model_patch": [
+     "MODEL_PATCH",
+     {}
+    ],
+    "vae": [
+     "VAE",
+     {}
+    ],
+    "image": [
+     "IMAGE",
+     {}
+    ],
+    "strength_start": [
+     "FLOAT",
+     {
+      "tooltip": "Control strength at the start of sampling (high sigma).",
+      "default": 1.0,
+      "min": 0.0,
+      "max": 10.0,
+      "step": 0.01
+     }
+    ],
+    "strength_end": [
+     "FLOAT",
+     {
+      "tooltip": "Control strength at the end of sampling (low sigma). Linearly interpolated from start.",
+      "default": 1.0,
+      "min": 0.0,
+      "max": 10.0,
+      "step": 0.01
+     }
+    ],
+    "restore_cfg": [
+     "FLOAT",
+     {
+      "tooltip": "Pulls denoised output toward the input latent. Higher = stronger fidelity to input. 0 to disable.",
+      "advanced": true,
+      "default": 4.0,
+      "min": 0.0,
+      "max": 20.0,
+      "step": 0.1
+     }
+    ],
+    "restore_cfg_s_tmin": [
+     "FLOAT",
+     {
+      "tooltip": "Sigma threshold below which restore_cfg is disabled.",
+      "advanced": true,
+      "default": 0.05,
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.01
+     }
+    ]
+   }
+  },
+  "output": [
+   "MODEL"
+  ]
+ },
+ "SamplerCustom": {
+  "input": {
+   "required": {
+    "model": [
+     "MODEL",
+     {}
+    ],
+    "add_noise": [
+     "BOOLEAN",
+     {
+      "advanced": true,
+      "default": true
+     }
+    ],
+    "noise_seed": [
+     "INT",
+     {
+      "default": 0,
+      "min": 0,
+      "max": 18446744073709551615,
+      "control_after_generate": true
+     }
+    ],
+    "cfg": [
+     "FLOAT",
+     {
+      "default": 8.0,
+      "min": 0.0,
+      "max": 100.0,
+      "step": 0.1,
+      "round": 0.01
+     }
+    ],
+    "positive": [
+     "CONDITIONING",
+     {}
+    ],
+    "negative": [
+     "CONDITIONING",
+     {}
+    ],
+    "sampler": [
+     "SAMPLER",
+     {}
+    ],
+    "sigmas": [
+     "SIGMAS",
+     {}
+    ],
+    "latent_image": [
+     "LATENT",
+     {}
+    ]
+   }
+  },
+  "output": [
+   "LATENT",
+   "LATENT"
+  ]
+ },
+ "SamplerCustomAdvanced": {
+  "input": {
+   "required": {
+    "noise": [
+     "NOISE",
+     {}
+    ],
+    "guider": [
+     "GUIDER",
+     {}
+    ],
+    "sampler": [
+     "SAMPLER",
+     {}
+    ],
+    "sigmas": [
+     "SIGMAS",
+     {}
+    ],
+    "latent_image": [
+     "LATENT",
+     {}
+    ]
+   }
+  },
+  "output": [
+   "LATENT",
+   "LATENT"
+  ]
+ },
+ "SaveImage": {
+  "input": {
+   "required": {
+    "images": [
+     "IMAGE",
+     {
+      "tooltip": "The images to save."
+     }
+    ],
+    "filename_prefix": [
+     "STRING",
+     {
+      "default": "ComfyUI",
+      "tooltip": "The prefix for the file to save. This may include formatting information such as %date:yyyy-MM-dd% or %Empty Latent Image.width% to include values from nodes."
+     }
+    ]
+   },
+   "hidden": {
+    "prompt": "PROMPT",
+    "extra_pnginfo": "EXTRA_PNGINFO"
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ },
+ "SeedVR2Conditioning": {
+  "input": {
+   "required": {
+    "model": [
+     "MODEL",
+     {
+      "tooltip": "The SeedVR2 model."
+     }
+    ],
+    "vae_conditioning": [
+     "LATENT",
+     {
+      "display_name": "latent"
+     }
+    ]
+   }
+  },
+  "output": [
+   "CONDITIONING",
+   "CONDITIONING"
+  ]
+ },
+ "SeedVR2PostProcessing": {
+  "input": {
+   "required": {
+    "images": [
+     "IMAGE",
+     {
+      "tooltip": "The generated image to process."
+     }
+    ],
+    "original_resized_images": [
+     "IMAGE",
+     {
+      "tooltip": "The original resized image before pre-processing, used as reference."
+     }
+    ],
+    "color_correction_method": [
+     "COMBO",
+     {
+      "tooltip": "Method to match the generated image colors to the original image. lab: transfer color in CIELAB space, preserving detail (most faithful). wavelet: transfer low-frequency color, keeping upscaled high-frequency detail. adain: match per-channel mean/std (fastest, global tint). none: skip color transfer (geometry alignment only).",
+      "default": "lab",
+      "multiselect": false,
+      "options": [
+       "lab",
+       "wavelet",
+       "adain",
+       "none"
+      ]
+     }
+    ]
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ },
+ "SeedVR2Preprocess": {
+  "input": {
+   "required": {
+    "resized_images": [
+     "IMAGE",
+     {
+      "tooltip": "The resized image to process."
+     }
+    ]
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ },
+ "TextEncodeQwenImage21": {
+  "input": {
+   "required": {
+    "clip": [
+     "CLIP",
+     {}
+    ],
+    "prompt": [
+     "STRING",
+     {
+      "multiline": true,
+      "dynamicPrompts": true
+     }
+    ],
+    "negative_prompt": [
+     "STRING",
+     {
+      "multiline": true,
+      "dynamicPrompts": true
+     }
+    ],
+    "resolution": [
+     "INT",
+     {
+      "tooltip": "Reference images are resized to about resolution x resolution pixels, at multiples of 32, preserving aspect ratio. 0 keeps each reference at its own size, rounded to a multiple of 32. ",
+      "default": 1024,
+      "min": 0,
+      "max": 4096,
+      "step": 32
+     }
+    ],
+    "images": [
+     "COMFY_AUTOGROW_V3",
+     {
+      "tooltip": "Reference images, seen by the text encoder and spliced into the sequence as VAE latents.",
+      "template": {
+       "input": {
+        "required": {
+         "image": [
+          "IMAGE",
+          {}
+         ]
+        }
+       },
+       "names": [
+        "image_1",
+        "image_2",
+        "image_3",
+        "image_4",
+        "image_5",
+        "image_6",
+        "image_7",
+        "image_8",
+        "image_9",
+        "image_10",
+        "image_11",
+        "image_12",
+        "image_13",
+        "image_14",
+        "image_15",
+        "image_16"
+       ],
+       "min": 0
+      }
+     }
+    ]
+   },
+   "optional": {
+    "vae": [
+     "VAE",
+     {}
+    ]
+   }
+  },
+  "output": [
+   "CONDITIONING",
+   "CONDITIONING",
+   "LATENT"
+  ]
+ },
+ "UNETLoader": {
+  "input": {
+   "required": {
+    "unet_name": [
+     [
+      "flux-2-klein-4b.safetensors",
+      "flux-2-klein-9b-fp8.safetensors",
+      "flux3-image-klein-bf16.safetensors",
+      "iris-3b-upscaler.safetensors",
+      "pid_1.5_flux2_1024_to_4096_4step_bf16.safetensors",
+      "pid_flux2_512_to_2048_4step_bf16.safetensors",
+      "qwen_image_2.1_bf16.safetensors",
+      "seedvr2_3b_fp16.safetensors",
+      "seedvr2_7b_int8_convrot.safetensors",
+      "seedvr2_7b_sharp_int8_convrot.safetensors"
+     ]
+    ],
+    "weight_dtype": [
+     [
+      "default",
+      "fp8_e4m3fn",
+      "fp8_e4m3fn_fast",
+      "fp8_e5m2"
+     ],
+     {
+      "advanced": true
+     }
+    ]
+   }
+  },
+  "output": [
+   "MODEL"
+  ]
+ },
+ "UpscaleModelLoader": {
+  "input": {
+   "required": {
+    "model_name": [
+     "COMBO",
+     {
+      "multiselect": false,
+      "options": [
+       "4xNomos2_hq_dat2.safetensors"
+      ]
+     }
+    ]
+   }
+  },
+  "output": [
+   "UPSCALE_MODEL"
+  ]
+ },
+ "VAEDecode": {
+  "input": {
+   "required": {
+    "samples": [
+     "LATENT",
+     {
+      "tooltip": "The latent to be decoded."
+     }
+    ],
+    "vae": [
+     "VAE",
+     {
+      "tooltip": "The VAE model used for decoding the latent."
+     }
+    ]
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ },
+ "VAEDecodeTiled": {
+  "input": {
+   "required": {
+    "samples": [
+     "LATENT"
+    ],
+    "vae": [
+     "VAE"
+    ],
+    "tile_size": [
+     "INT",
+     {
+      "default": 512,
+      "min": 64,
+      "max": 4096,
+      "step": 32,
+      "advanced": true
+     }
+    ],
+    "overlap": [
+     "INT",
+     {
+      "default": 64,
+      "min": 0,
+      "max": 4096,
+      "step": 32,
+      "advanced": true
+     }
+    ],
+    "temporal_size": [
+     "INT",
+     {
+      "default": 64,
+      "min": 8,
+      "max": 4096,
+      "step": 4,
+      "tooltip": "Only used for video VAEs: Amount of frames to decode at a time.",
+      "advanced": true
+     }
+    ],
+    "temporal_overlap": [
+     "INT",
+     {
+      "default": 8,
+      "min": 4,
+      "max": 4096,
+      "step": 4,
+      "tooltip": "Only used for video VAEs: Amount of frames to overlap.",
+      "advanced": true
+     }
+    ]
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ },
+ "VAEEncode": {
+  "input": {
+   "required": {
+    "pixels": [
+     "IMAGE"
+    ],
+    "vae": [
+     "VAE"
+    ]
+   }
+  },
+  "output": [
+   "LATENT"
+  ]
+ },
+ "VAEEncodeTiled": {
+  "input": {
+   "required": {
+    "pixels": [
+     "IMAGE"
+    ],
+    "vae": [
+     "VAE"
+    ],
+    "tile_size": [
+     "INT",
+     {
+      "default": 512,
+      "min": 64,
+      "max": 4096,
+      "step": 64,
+      "advanced": true
+     }
+    ],
+    "overlap": [
+     "INT",
+     {
+      "default": 64,
+      "min": 0,
+      "max": 4096,
+      "step": 32,
+      "advanced": true
+     }
+    ],
+    "temporal_size": [
+     "INT",
+     {
+      "default": 64,
+      "min": 8,
+      "max": 4096,
+      "step": 4,
+      "tooltip": "Only used for video VAEs: Amount of frames to encode at a time.",
+      "advanced": true
+     }
+    ],
+    "temporal_overlap": [
+     "INT",
+     {
+      "default": 8,
+      "min": 4,
+      "max": 4096,
+      "step": 4,
+      "tooltip": "Only used for video VAEs: Amount of frames to overlap.",
+      "advanced": true
+     }
+    ]
+   }
+  },
+  "output": [
+   "LATENT"
+  ]
+ },
+ "VAELoader": {
+  "input": {
+   "required": {
+    "vae_name": [
+     [
+      "flux2-vae.safetensors",
+      "qwen_image_2.1_vae_bf16.safetensors",
+      "seedvr2_ema_vae_fp16.safetensors",
+      "pixel_space"
+     ]
+    ]
+   }
+  },
+  "output": [
+   "VAE"
+  ]
+ },
+ "VOSR2ModelLoader": {
+  "input": {
+   "required": {
+    "model": [
+     "COMBO",
+     {
+      "tooltip": "VOSR 2.0 bundle folder under models/vosr2/ (DiT + its matched VAE + vision encoder). Downloaded from CSWRY/VOSR on first run if absent.",
+      "default": "VOSR2",
+      "multiselect": false,
+      "options": [
+       "VOSR2"
+      ]
+     }
+    ],
+    "dtype": [
+     "COMBO",
+     {
+      "tooltip": "Compute dtype for the DiT and vision encoder. The VAE always runs in fp32.",
+      "default": "default",
+      "multiselect": false,
+      "options": [
+       "default",
+       "fp16",
+       "bf16"
+      ]
+     }
+    ]
+   }
+  },
+  "output": [
+   "VOSR2_MODEL"
+  ]
+ },
+ "VOSR2Upscale": {
+  "input": {
+   "required": {
+    "model": [
+     "VOSR2_MODEL",
+     {
+      "tooltip": "Loaded VOSR 2.0 bundle."
+     }
+    ],
+    "image": [
+     "IMAGE",
+     {}
+    ],
+    "upscale": [
+     "INT",
+     {
+      "tooltip": "Exact output multiplier. VOSR 2.0 was trained on degradations up to 16x, so higher factors are supported, but there's no general quality guarantee above ~4x -- results depend on the specific image and starting/target resolution, not just the factor. Uncapped so you can experiment; use tiling for large outputs.",
+      "default": 4,
+      "min": 1,
+      "max": 9223372036854775807
+     }
+    ],
+    "seed": [
+     "INT",
+     {
+      "tooltip": "Initial latent-noise seed.",
+      "default": 42,
+      "min": 0,
+      "max": 9223372036854775807,
+      "control_after_generate": "fixed"
+     }
+    ],
+    "color_alignment": [
+     "COMBO",
+     {
+      "default": "wavelet",
+      "multiselect": false,
+      "options": [
+       "wavelet",
+       "adain",
+       "none"
+      ]
+     }
+    ],
+    "tile_size": [
+     "INT",
+     {
+      "tooltip": "DiT pixel tile size; 0 disables tiling. VOSR 2.0 was trained natively at up to 512px, so tiling is required (e.g. 512) whenever the upscaled output exceeds 512x512 -- otherwise quality degrades.",
+      "default": 0,
+      "min": 0,
+      "max": 4096,
+      "step": 64
+     }
+    ],
+    "tile_overlap": [
+     "INT",
+     {
+      "default": 32,
+      "min": 0,
+      "max": 512,
+      "step": 8
+     }
+    ],
+    "vae_tile_size": [
+     "INT",
+     {
+      "tooltip": "VAE pixel tile size; 0 disables VAE tiling and decodes the full image in one pass regardless of tile_size -- a common source of CUDA OOM once the upscaled output goes much past 1024px. Set a nonzero value (e.g. 1024) for large outputs.",
+      "default": 0,
+      "min": 0,
+      "max": 8192,
+      "step": 64
+     }
+    ],
+    "vae_tile_overlap": [
+     "INT",
+     {
+      "default": 32,
+      "min": 0,
+      "max": 512,
+      "step": 8
+     }
+    ]
+   }
+  },
+  "output": [
+   "IMAGE"
+  ]
+ }
+}
